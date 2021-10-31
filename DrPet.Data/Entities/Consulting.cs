@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace DrPet.Data.Entities
 {
-    public class ConsultingTime : EntityBase<ConsultingTime>
+    public class Consulting : EntityBase<Consulting>
     {
         public DateTime StartOfConsulting { get; set; }
         public DateTime EndOfConsulting { get; set; }
@@ -14,7 +14,7 @@ namespace DrPet.Data.Entities
 
         public ICollection<Treatment> Treatments { get; set; }
 
-        public override void Configure(EntityTypeBuilder<ConsultingTime> builder)
+        public override void Configure(EntityTypeBuilder<Consulting> builder)
         {
             builder.HasIndex(ct => new { ct.StartOfConsulting, ct.EndOfConsulting, ct.WorkerId }).IsUnique();
 

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DrPet.Data.Migrations
 {
     [DbContext(typeof(DrPetDbContext))]
-    [Migration("20211021134739_InitialModel")]
-    partial class InitialModel
+    [Migration("20211031105416_LetMedicineToBeNull")]
+    partial class LetMedicineToBeNull
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,12 +21,21 @@ namespace DrPet.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DrPet.Data.Entities.ConsultingTime", b =>
+            modelBuilder.Entity("DrPet.Data.Entities.Consulting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("EndOfConsulting")
                         .HasColumnType("datetime2");
@@ -47,6 +56,31 @@ namespace DrPet.Data.Migrations
                     b.ToTable("Consultings");
                 });
 
+            modelBuilder.Entity("DrPet.Data.Entities.Medicine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Medicine");
+                });
+
             modelBuilder.Entity("DrPet.Data.Entities.Owner", b =>
                 {
                     b.Property<int>("Id")
@@ -58,8 +92,13 @@ namespace DrPet.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Comment")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Location")
                         .HasMaxLength(50)
@@ -85,25 +124,27 @@ namespace DrPet.Data.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Comment")
-                        .HasMaxLength(1000)
-                        .HasColumnType("nvarchar(1000)");
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<string>("Species")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("Variety")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("VarietyId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("VarietyId");
 
                     b.ToTable("Pets");
                 });
@@ -114,6 +155,15 @@ namespace DrPet.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -145,6 +195,12 @@ namespace DrPet.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
 
@@ -161,6 +217,33 @@ namespace DrPet.Data.Migrations
                     b.HasIndex("PetId");
 
                     b.ToTable("Purchases");
+                });
+
+            modelBuilder.Entity("DrPet.Data.Entities.Species", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("LatinName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Species");
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.Treatment", b =>
@@ -183,12 +266,17 @@ namespace DrPet.Data.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("Length")
                         .HasColumnType("int");
 
-                    b.Property<string>("Medicine")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int?>("MedicineId")
+                        .HasColumnType("int");
 
                     b.Property<int>("OwnerId")
                         .HasColumnType("int");
@@ -211,6 +299,8 @@ namespace DrPet.Data.Migrations
 
                     b.HasIndex("ConsultingId");
 
+                    b.HasIndex("MedicineId");
+
                     b.HasIndex("OwnerId");
 
                     b.HasIndex("PetId");
@@ -231,6 +321,15 @@ namespace DrPet.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Name")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -247,12 +346,50 @@ namespace DrPet.Data.Migrations
                     b.ToTable("TreatmentTypes");
                 });
 
+            modelBuilder.Entity("DrPet.Data.Entities.Variety", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SpeciesId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SpeciesId");
+
+                    b.ToTable("Variety");
+                });
+
             modelBuilder.Entity("DrPet.Data.Entities.Worker", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfCreation")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateOfUpdate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .HasMaxLength(1000)
@@ -261,12 +398,15 @@ namespace DrPet.Data.Migrations
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
+                    b.Property<string>("PublicDescription")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("DrPet.Data.Entities.ConsultingTime", b =>
+            modelBuilder.Entity("DrPet.Data.Entities.Consulting", b =>
                 {
                     b.HasOne("DrPet.Data.Entities.Worker", "Worker")
                         .WithMany("Consultings")
@@ -275,6 +415,17 @@ namespace DrPet.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Worker");
+                });
+
+            modelBuilder.Entity("DrPet.Data.Entities.Pet", b =>
+                {
+                    b.HasOne("DrPet.Data.Entities.Variety", "Variety")
+                        .WithMany("Pets")
+                        .HasForeignKey("VarietyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Variety");
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.PetOwnership", b =>
@@ -318,14 +469,19 @@ namespace DrPet.Data.Migrations
             modelBuilder.Entity("DrPet.Data.Entities.Treatment", b =>
                 {
                     b.HasOne("DrPet.Data.Entities.Treatment", "Antecedent")
-                        .WithMany()
+                        .WithMany("Consequences")
                         .HasForeignKey("AntecedentId");
 
-                    b.HasOne("DrPet.Data.Entities.ConsultingTime", "Consulting")
+                    b.HasOne("DrPet.Data.Entities.Consulting", "Consulting")
                         .WithMany("Treatments")
                         .HasForeignKey("ConsultingId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
+
+                    b.HasOne("DrPet.Data.Entities.Medicine", "Medicine")
+                        .WithMany("Treatments")
+                        .HasForeignKey("MedicineId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("DrPet.Data.Entities.Owner", "Owner")
                         .WithMany("Treatments")
@@ -361,6 +517,8 @@ namespace DrPet.Data.Migrations
 
                     b.Navigation("Consulting");
 
+                    b.Navigation("Medicine");
+
                     b.Navigation("Owner");
 
                     b.Navigation("Pet");
@@ -372,7 +530,23 @@ namespace DrPet.Data.Migrations
                     b.Navigation("Worker");
                 });
 
-            modelBuilder.Entity("DrPet.Data.Entities.ConsultingTime", b =>
+            modelBuilder.Entity("DrPet.Data.Entities.Variety", b =>
+                {
+                    b.HasOne("DrPet.Data.Entities.Species", "Species")
+                        .WithMany("Varieties")
+                        .HasForeignKey("SpeciesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Species");
+                });
+
+            modelBuilder.Entity("DrPet.Data.Entities.Consulting", b =>
+                {
+                    b.Navigation("Treatments");
+                });
+
+            modelBuilder.Entity("DrPet.Data.Entities.Medicine", b =>
                 {
                     b.Navigation("Treatments");
                 });
@@ -400,9 +574,24 @@ namespace DrPet.Data.Migrations
                     b.Navigation("Treatments");
                 });
 
+            modelBuilder.Entity("DrPet.Data.Entities.Species", b =>
+                {
+                    b.Navigation("Varieties");
+                });
+
+            modelBuilder.Entity("DrPet.Data.Entities.Treatment", b =>
+                {
+                    b.Navigation("Consequences");
+                });
+
             modelBuilder.Entity("DrPet.Data.Entities.TreatmentType", b =>
                 {
                     b.Navigation("Treatments");
+                });
+
+            modelBuilder.Entity("DrPet.Data.Entities.Variety", b =>
+                {
+                    b.Navigation("Pets");
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.Worker", b =>

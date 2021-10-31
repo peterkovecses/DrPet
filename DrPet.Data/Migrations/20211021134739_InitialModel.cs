@@ -125,7 +125,7 @@ namespace DrPet.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ConsultingTimes",
+                name: "Consultings",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -169,7 +169,7 @@ namespace DrPet.Data.Migrations
                     table.ForeignKey(
                         name: "FK_Treatments_ConsultingTimes_ConsultingId",
                         column: x => x.ConsultingId,
-                        principalTable: "ConsultingTimes",
+                        principalTable: "Consultings",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
@@ -212,13 +212,13 @@ namespace DrPet.Data.Migrations
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultingTimes_StartOfConsulting_EndOfConsulting_WorkerId",
-                table: "ConsultingTimes",
+                table: "Consultings",
                 columns: new[] { "StartOfConsulting", "EndOfConsulting", "WorkerId" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_ConsultingTimes_WorkerId",
-                table: "ConsultingTimes",
+                table: "Consultings",
                 column: "WorkerId");
 
             migrationBuilder.CreateIndex(
@@ -294,7 +294,7 @@ namespace DrPet.Data.Migrations
                 name: "Treatments");
 
             migrationBuilder.DropTable(
-                name: "ConsultingTimes");
+                name: "Consultings");
 
             migrationBuilder.DropTable(
                 name: "Purchases");

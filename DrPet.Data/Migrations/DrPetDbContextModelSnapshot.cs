@@ -19,7 +19,7 @@ namespace DrPet.Data.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DrPet.Data.Entities.ConsultingTime", b =>
+            modelBuilder.Entity("DrPet.Data.Entities.Consulting", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +51,7 @@ namespace DrPet.Data.Migrations
                     b.HasIndex("StartOfConsulting", "EndOfConsulting", "WorkerId")
                         .IsUnique();
 
-                    b.ToTable("ConsultingTimes");
+                    b.ToTable("Consultings");
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.Medicine", b =>
@@ -273,7 +273,7 @@ namespace DrPet.Data.Migrations
                     b.Property<int?>("Length")
                         .HasColumnType("int");
 
-                    b.Property<int>("MedicineId")
+                    b.Property<int?>("MedicineId")
                         .HasColumnType("int");
 
                     b.Property<int>("OwnerId")
@@ -404,7 +404,7 @@ namespace DrPet.Data.Migrations
                     b.ToTable("Workers");
                 });
 
-            modelBuilder.Entity("DrPet.Data.Entities.ConsultingTime", b =>
+            modelBuilder.Entity("DrPet.Data.Entities.Consulting", b =>
                 {
                     b.HasOne("DrPet.Data.Entities.Worker", "Worker")
                         .WithMany("Consultings")
@@ -470,7 +470,7 @@ namespace DrPet.Data.Migrations
                         .WithMany("Consequences")
                         .HasForeignKey("AntecedentId");
 
-                    b.HasOne("DrPet.Data.Entities.ConsultingTime", "Consulting")
+                    b.HasOne("DrPet.Data.Entities.Consulting", "Consulting")
                         .WithMany("Treatments")
                         .HasForeignKey("ConsultingId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -479,8 +479,7 @@ namespace DrPet.Data.Migrations
                     b.HasOne("DrPet.Data.Entities.Medicine", "Medicine")
                         .WithMany("Treatments")
                         .HasForeignKey("MedicineId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("DrPet.Data.Entities.Owner", "Owner")
                         .WithMany("Treatments")
@@ -540,7 +539,7 @@ namespace DrPet.Data.Migrations
                     b.Navigation("Species");
                 });
 
-            modelBuilder.Entity("DrPet.Data.Entities.ConsultingTime", b =>
+            modelBuilder.Entity("DrPet.Data.Entities.Consulting", b =>
                 {
                     b.Navigation("Treatments");
                 });

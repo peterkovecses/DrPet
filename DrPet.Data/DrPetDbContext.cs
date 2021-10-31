@@ -9,7 +9,7 @@ namespace DrPet.Data
     {
         public DrPetDbContext(DbContextOptions options) : base(options) { }
 
-        public DbSet<ConsultingTime> ConsultingTimes { get; set; }
+        public DbSet<Consulting> Consultings { get; set; }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Pet> Pets { get; set; }
         public DbSet<PetOwnership> PetOwnerships { get; set; }

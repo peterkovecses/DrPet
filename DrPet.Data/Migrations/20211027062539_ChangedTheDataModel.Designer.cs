@@ -53,7 +53,7 @@ namespace DrPet.Data.Migrations
                     b.HasIndex("StartOfConsulting", "EndOfConsulting", "WorkerId")
                         .IsUnique();
 
-                    b.ToTable("ConsultingTimes");
+                    b.ToTable("Consultings");
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.Medicine", b =>

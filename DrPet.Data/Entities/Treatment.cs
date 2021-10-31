@@ -8,8 +8,8 @@ namespace DrPet.Data.Entities
     public class Treatment : EntityBase<Treatment>
     {
         public DateTime Date { get; set; }
-        public int MedicineId { get; set; }
-        public Medicine Medicine { get; set; }
+        public int? MedicineId { get; set; }
+        public Medicine? Medicine { get; set; }
         public TreatmentLength? Length { get; set; }        
 
         public int TypeId { get; set; }
@@ -21,12 +21,11 @@ namespace DrPet.Data.Entities
         public int WorkerId { get; set; }
         public Worker Worker { get; set; }
         public int ConsultingId { get; set; }
-        public ConsultingTime Consulting { get; set; }
+        public Consulting Consulting { get; set; }
         public int? AntecedentId { get; set; }
         public Treatment? Antecedent { get; set; }
         public int PurchaseId { get; set; }
         public Purchase Purchase { get; set; }
-
         public ICollection<Treatment>? Consequences { get; set; }
 
         public override void Configure(EntityTypeBuilder<Treatment> builder)

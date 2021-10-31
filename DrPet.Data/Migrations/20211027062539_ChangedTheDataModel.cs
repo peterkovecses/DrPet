@@ -177,20 +177,20 @@ namespace DrPet.Data.Migrations
 
             migrationBuilder.AddColumn<string>(
                 name: "Comment",
-                table: "ConsultingTimes",
+                table: "Consultings",
                 type: "nvarchar(max)",
                 nullable: true);
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "DateOfCreation",
-                table: "ConsultingTimes",
+                table: "Consultings",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
 
             migrationBuilder.AddColumn<DateTime>(
                 name: "DateOfUpdate",
-                table: "ConsultingTimes",
+                table: "Consultings",
                 type: "datetime2",
                 nullable: false,
                 defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
@@ -392,15 +392,15 @@ namespace DrPet.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Comment",
-                table: "ConsultingTimes");
+                table: "Consultings");
 
             migrationBuilder.DropColumn(
                 name: "DateOfCreation",
-                table: "ConsultingTimes");
+                table: "Consultings");
 
             migrationBuilder.DropColumn(
                 name: "DateOfUpdate",
-                table: "ConsultingTimes");
+                table: "Consultings");
 
             migrationBuilder.AddColumn<string>(
                 name: "Medicine",

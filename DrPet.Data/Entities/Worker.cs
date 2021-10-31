@@ -10,7 +10,7 @@ namespace DrPet.Data.Entities
         public string? PublicDescription { get; set; }
 
         public ICollection<Treatment>? Treatments { get; set; }
-        public ICollection<ConsultingTime>? Consultings { get; set; }
+        public ICollection<Consulting>? Consultings { get; set; }
 
         public override void Configure(EntityTypeBuilder<Worker> builder)
         {
