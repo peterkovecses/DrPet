@@ -3,7 +3,15 @@
 @{
 }
 
-<h2 class="mb-4">@Model.Consultings.ElementAt(0).WorkerName rendelési időpontjai</h2>
+@if (Model.Consultings.Count() > 0)
+{
+    <h2 class="mb-4">@Model.Consultings.ElementAt(0).WorkerName rendelési időpontjai</h2>
+}
+else
+{
+    <h2>Nem található a kersett orvos</h2>
+}
+
 
 <table class="table table-striped">
     <thead>
