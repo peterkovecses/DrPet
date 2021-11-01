@@ -10,9 +10,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrPet.Bll", "DrPet.Bll\DrPet.Bll.csproj", "{2D70418E-2E81-42D1-ACD4-F356B6606998}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrPet.Bll", "DrPet.Bll\DrPet.Bll.csproj", "{2D70418E-2E81-42D1-ACD4-F356B6606998}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DrPet.Web", "DrPet.Web\DrPet.Web.csproj", "{C9047C3C-CBFF-4E64-86EF-EBCD97D472FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DrPet.Web", "DrPet.Web\DrPet.Web.csproj", "{C9047C3C-CBFF-4E64-86EF-EBCD97D472FC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

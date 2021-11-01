@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DrPet.Bll.Services
 {
-    class ConsultingService : IConsultingService
+    public class ConsultingService : IConsultingService
     {
         public ConsultingService(DrPetDbContext dbContext) => DbContext = dbContext;
 
@@ -24,13 +24,26 @@ namespace DrPet.Bll.Services
             if (piece != null)
                 consultings = consultings.Take(piece.Value);
             return await consultings
-                .Select(c => new Consulting(c.Id, c.StartOfConsulting, c.EndOfConsulting, c.WorkerId))
+                .Select(c => new Consulting(c.Id, c.StartOfConsulting, c.EndOfConsulting, c.Worker.Name))
                 .ToListAsync();
         }
 
-        public async Task<IEnumerable<Models.Consulting>> GetMonthlyConsultingsAsync()
+        public async Task<IEnumerable<Models.Consulting>> GetMonthlyConsultingsAsync(string date)
         {
-            return await GetConsultingsAsync(new(DateTime.Today.Year, DateTime.Today.Month, 1), new(DateTime.Today.Year, DateTime.Today.Month + 1, 1));
+            DateTime from;
+            DateTime till;
+            if (date == null)
+            {
+                from = new(DateTime.Today.Year, DateTime.Today.Month, 1);
+                till = from.AddMonths(1);
+            }
+            else
+            {
+                from = DateTime.Parse(date);
+                from = new DateTime(from.Year, from.Month, 1);
+                till = from.AddMonths(1);
+            }            
+            return await GetConsultingsAsync(from, till);
         }
     }
 }

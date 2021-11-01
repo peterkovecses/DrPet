@@ -6,10 +6,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using DrPet.Bll.Interfaces;
+using DrPet.Bll.Services;
+
 
 namespace DrPet.Web
 {
@@ -26,6 +25,7 @@ namespace DrPet.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<DrPetDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddScoped<IConsultingService, ConsultingService>();
             services.AddRazorPages();
         }
 

@@ -5,10 +5,10 @@ using DrPet.Bll.Models;
 
 namespace DrPet.Bll.Interfaces
 {
-    interface IConsultingService
+    public interface IConsultingService
     {
         public Task<IReadOnlyCollection<Consulting>> GetConsultingsAsync(DateTime from, DateTime till, int? workerId = null, int? piece = null);
 
-        public Task<IEnumerable<Consulting>> GetMonthlyConsultingsAsync();
+        public Task<IEnumerable<Consulting>> GetMonthlyConsultingsAsync(string date);
     }
 }
