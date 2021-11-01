@@ -9,6 +9,6 @@ namespace DrPet.Bll.Interfaces
     {
         public Task<IReadOnlyCollection<Consulting>> GetConsultingsAsync(DateTime from, DateTime till, int? workerId = null, int? piece = null);
 
-        public Task<IEnumerable<Consulting>> GetMonthlyConsultingsAsync(string date);
+        public Task<IEnumerable<Consulting>> GetMonthlyConsultingsAsync(string? date);
     }
 }

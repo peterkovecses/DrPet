@@ -1,0 +1,24 @@
+﻿@page
+@model DrPet.Web.Pages.Consultings.DoctorsConsultingsModel
+@{
+}
+
+<h2 class="mb-4">@Model.Consultings.ElementAt(0).WorkerName rendelési időpontjai</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Rendelés kezdete</th>
+            <th scope="col">Rendelés vége</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Consultings)
+        {
+            <tr>
+                <td>@item.StartOfConsulting</td>
+                <td>@item.EndOfConsulting</td>
+            </tr>
+        }
+    </tbody>
+</table>

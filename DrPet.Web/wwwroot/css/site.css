@@ -59,7 +59,7 @@ html {
 }
 
 body {
-  /* Margin bottom by footer height */
+  /* Margin bottom by footer height */  
   margin-bottom: 60px;
 }
 .footer {
@@ -70,3 +70,7 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
+.doctorcard {
+    background-color: #009B77;
+    color: white;
+}

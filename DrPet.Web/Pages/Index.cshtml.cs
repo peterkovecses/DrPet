@@ -5,21 +5,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DrPet.Bll.Interfaces;
+using DrPet.Bll.Models;
 
 namespace DrPet.Web.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-
-        public IndexModel(ILogger<IndexModel> logger)
+        public IndexModel(IWorkerService workerService, IConsultingService consultingService)
         {
-            _logger = logger;
+            WorkerService = workerService;
+            ConsultingService = consultingService;
         }
 
-        public void OnGet()
-        {
+        public IWorkerService WorkerService { get; }
+        public IConsultingService ConsultingService { get; }
 
+        public IEnumerable<Doctor> Doctors { get; private set; }
+        public IEnumerable<Consulting> Consultings { get; private set; }
+
+        public async Task OnGet()
+        {
+            Doctors = await WorkerService.GetDoctorsAsync();
+            Consultings = await ConsultingService.GetMonthlyConsultingsAsync(null);
+            Consultings = Consultings.Take(10);
         }
     }
 }

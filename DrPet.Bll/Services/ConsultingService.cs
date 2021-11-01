@@ -24,11 +24,11 @@ namespace DrPet.Bll.Services
             if (piece != null)
                 consultings = consultings.Take(piece.Value);
             return await consultings
-                .Select(c => new Consulting(c.Id, c.StartOfConsulting, c.EndOfConsulting, c.Worker.Name))
+                .Select(c => new Consulting(c.Id, c.StartOfConsulting, c.EndOfConsulting, c.WorkerId, c.Worker.Name))
                 .ToListAsync();
-        }
+        }        
 
-        public async Task<IEnumerable<Models.Consulting>> GetMonthlyConsultingsAsync(string date)
+        public async Task<IEnumerable<Models.Consulting>> GetMonthlyConsultingsAsync(string? date)
         {
             DateTime from;
             DateTime till;
