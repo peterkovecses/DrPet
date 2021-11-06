@@ -16,10 +16,9 @@ namespace DrPet.Web.Pages.Consultings
         public IEnumerable<Consulting> Consultings { get; private set; }
 
         public async Task OnGet(string id)
-        {
-            int parsedId = -1;
-            int.TryParse(id, out parsedId);
-            Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, DateTime.Now.AddMonths(1), parsedId);
+        {            
+            if (int.TryParse(id, out var parsedId))
+                Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, DateTime.Now.AddMonths(1), parsedId);
         }
     }
 }

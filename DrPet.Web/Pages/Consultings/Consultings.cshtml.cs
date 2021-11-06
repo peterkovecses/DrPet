@@ -15,11 +15,16 @@ namespace DrPet.Web.Pages
 
         public IConsultingService ConsultingService { get; }
 
+        public DateTime ActualMonth { get; set; } = DateTime.Now;
+
         public IEnumerable<Consulting> Consultings { get; private set; }
 
         public async Task OnGet(string? date)
         {
             Consultings = await ConsultingService.GetMonthlyConsultingsAsync(date);
+            if (date != null)
+                if (DateTime.TryParse(date, out var actualDate))
+                    ActualMonth = actualDate;
         }
     }
 }
