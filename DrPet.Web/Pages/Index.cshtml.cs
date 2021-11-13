@@ -12,19 +12,18 @@ namespace DrPet.Web.Pages
 {
     public class IndexModel : PageModel
     {
+        public IWorkerService WorkerService { get; }
+        public IConsultingService ConsultingService { get; }
         public IndexModel(IWorkerService workerService, IConsultingService consultingService)
         {
             WorkerService = workerService;
             ConsultingService = consultingService;
-        }
-
-        public IWorkerService WorkerService { get; }
-        public IConsultingService ConsultingService { get; }
+        }        
 
         public IEnumerable<Doctor> Doctors { get; private set; }
         public IEnumerable<Consulting> Consultings { get; private set; }
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             Doctors = await WorkerService.GetDoctorsAsync();
             Consultings = await ConsultingService.GetMonthlyConsultingsAsync(null);

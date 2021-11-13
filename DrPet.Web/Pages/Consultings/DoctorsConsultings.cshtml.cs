@@ -9,16 +9,15 @@ namespace DrPet.Web.Pages.Consultings
 {
     public class DoctorsConsultingsModel : PageModel
     {
-        public DoctorsConsultingsModel(IConsultingService consultingService) => ConsultingService = consultingService;
-
         public IConsultingService ConsultingService { get; }
+
+        public DoctorsConsultingsModel(IConsultingService consultingService) => ConsultingService = consultingService;        
 
         public IEnumerable<Consulting> Consultings { get; private set; }
 
-        public async Task OnGet(string id)
+        public async Task OnGetAsync(int id)
         {            
-            if (int.TryParse(id, out var parsedId))
-                Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, DateTime.Now.AddMonths(1), parsedId);
+            Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, DateTime.Now.AddMonths(1), id);
         }
     }
 }

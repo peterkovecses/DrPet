@@ -11,20 +11,20 @@ namespace DrPet.Web.Pages
 {
     public class ConsultingsModel : PageModel
     {
-        public ConsultingsModel(IConsultingService consultingService) => ConsultingService = consultingService;
-
         public IConsultingService ConsultingService { get; }
+
+        public ConsultingsModel(IConsultingService consultingService) => ConsultingService = consultingService;        
 
         public DateTime ActualMonth { get; set; } = DateTime.Now;
 
         public IEnumerable<Consulting> Consultings { get; private set; }
 
-        public async Task OnGet(string? date)
+        public async Task OnGetAsync(string? date)
         {
             Consultings = await ConsultingService.GetMonthlyConsultingsAsync(date);
-            if (date != null)
-                if (DateTime.TryParse(date, out var actualDate))
-                    ActualMonth = actualDate;
+            
+            if (date != null && DateTime.TryParse(date, out var actualDate))
+                ActualMonth = actualDate;
         }
     }
 }
