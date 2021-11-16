@@ -5,29 +5,29 @@ using DrPet.Bll.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DrPet.Web.Pages.Admin.Doctors
+namespace DrPet.Web.Pages.Admin.Owners
 {
     public class IndexModel : PageModel
     {
-        public IWorkerService WorkerService { get; }
+        public IOwnerService OwnerService { get; }
 
-        public IndexModel(IWorkerService workerService)
+        public IndexModel(IOwnerService ownerService)
         {
-            WorkerService = workerService;
+            OwnerService = ownerService;
         }
 
-        public IList<Doctor> Doctors { get; set; }
+        public IList<Owner> Owners { get; set; }
 
         public async Task OnGetAsync()
         {
-            Doctors = await WorkerService.GetDoctorsAsync();
+            Owners = await OwnerService.GetOwnersAsync();
         }
 
         public IActionResult OnPost(int id)
         {
-            WorkerService.DeleteWorker(id);
+            OwnerService.DeleteOwner(id);
 
             return new JsonResult(new { url = "reload" });
-        }      
+        }
     }
 }

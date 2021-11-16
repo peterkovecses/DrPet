@@ -4,22 +4,23 @@ using DrPet.Bll.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DrPet.Web.Pages.Admin.Doctors
+namespace DrPet.Web.Pages.Admin.Owners
 {
     public class CreateModel : PageModel
     {
-        public IWorkerService WorkerService { get; }
+        public IOwnerService OwnerService { get; }
 
-        public CreateModel(IWorkerService workerService)
+        public CreateModel(IOwnerService ownerService)
         {
-            WorkerService = workerService;
+            OwnerService = ownerService;
         }
 
         [BindProperty]
-        public Doctor Doctor { get; set; }
+        public Owner Owner { get; set; }
 
         public void OnGet()
         {
+
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -27,7 +28,7 @@ namespace DrPet.Web.Pages.Admin.Doctors
             if (!ModelState.IsValid)
                 return Page();
 
-            await WorkerService.AddOrUpdateDoctorAsync(Doctor);
+            await OwnerService.AddOrUpdateOwnerAsync(Owner);
 
             return RedirectToPage("./Index");
         }

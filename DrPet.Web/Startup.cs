@@ -27,6 +27,7 @@ namespace DrPet.Web
             services.AddDbContext<DrPetDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddScoped<IConsultingService, ConsultingService>();
             services.AddScoped<IWorkerService, WorkerService>();
+            services.AddScoped<IOwnerService, OwnerService>();
             services.AddRazorPages();
         }
 

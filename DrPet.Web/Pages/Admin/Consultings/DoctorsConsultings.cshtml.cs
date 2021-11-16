@@ -27,9 +27,6 @@ namespace DrPet.Web.Pages.Admin.Consultings
 
             Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null, id);
 
-            //if (!Consultings.Any())
-            //    return NotFound();
-
             return Page();
         }
 
