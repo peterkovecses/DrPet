@@ -1,9 +1,17 @@
 ﻿@page
 @model DrPet.Web.Pages.ConsultingsModel
 
-<h2>Rendelési időpontok</h2>
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h1>Rendelési időpontok @Model.ActualMonth</h1>
 
-<table class="table table-striped">
+    <div>
+        <a class="btn btn-outline-primary" asp-route-date="@(Model.ActualDate.AddMonths(-1))">Előző hónap</a>
+        <a class="btn btn-outline-primary" asp-route-date="@(Model.ActualDate.AddMonths(1))">Következő hónap</a>
+    </div>
+
+</div>
+
+<table class="table" id="consultingTable">
     <thead>
         <tr>
             <th scope="col">Rendelés kezdete</th>
@@ -23,9 +31,10 @@
     </tbody>
 </table>
 
-<nav aria-label="Page navigation example">
-    <ul class="pagination">
-        <li class="page-item mr-2"><a class="page-link" asp-route-date="@(Model.ActualMonth.AddMonths(-1))">Előző hónap</a></li>
-        <li class="page-item"><a class="page-link" asp-route-date="@(Model.ActualMonth.AddMonths(1))">Következő hónap</a></li>
-    </ul>
-</nav>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#consultingTable').dataTable();
+        });
+    </script>
+}

@@ -7,29 +7,29 @@ using DrPet.Bll.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace DrPet.Web.Pages.Admin.Doctors
+namespace DrPet.Web.Pages.Admin.Consultings
 {
     public class IndexModel : PageModel
     {
-        public IWorkerService WorkerService { get; }
+        public IConsultingService ConsultingService { get; }
 
-        public IndexModel(IWorkerService workerService)
+        public IndexModel(IConsultingService consultingService)
         {
-            WorkerService = workerService;
+            ConsultingService = consultingService;
         }
 
-        public IList<Doctor> Doctors { get; set; }
+        public IList<Consulting> Consultings { get; set; }
 
         public async Task OnGetAsync()
         {
-            Doctors = await WorkerService.GetDoctorsAsync();
+            Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null);
         }
 
         public IActionResult OnPost(int id)
         {
-            WorkerService.DeleteWorker(id);
+            ConsultingService.DeleteConsulting(id);
 
             return new JsonResult(new { url = "reload" });
-        }      
+        }
     }
 }

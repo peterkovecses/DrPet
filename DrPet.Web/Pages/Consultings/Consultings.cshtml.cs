@@ -15,16 +15,24 @@ namespace DrPet.Web.Pages
 
         public ConsultingsModel(IConsultingService consultingService) => ConsultingService = consultingService;        
 
-        public DateTime ActualMonth { get; set; } = DateTime.Now;
+        public DateTime ActualDate { get; set; } = DateTime.Now;
 
-        public IEnumerable<Consulting> Consultings { get; private set; }
+        public string ActualMonth { get; set; }
+
+        public IList<Consulting> Consultings { get; private set; }
 
         public async Task OnGetAsync(string? date)
         {
             Consultings = await ConsultingService.GetMonthlyConsultingsAsync(date);
             
             if (date != null && DateTime.TryParse(date, out var actualDate))
-                ActualMonth = actualDate;
+                ActualDate = actualDate;
+
+            if (Consultings.Any())
+                ActualMonth = Consultings[0].StartOfConsulting.ToString("MMMM");
+
+            else
+                ActualMonth = "";
         }
     }
 }

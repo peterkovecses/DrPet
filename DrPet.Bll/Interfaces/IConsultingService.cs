@@ -7,8 +7,14 @@ namespace DrPet.Bll.Interfaces
 {
     public interface IConsultingService
     {
-        public Task<IReadOnlyCollection<Consulting>> GetConsultingsAsync(DateTime from, DateTime till, int? workerId = null, int? piece = null);
+        public Task<IList<Consulting>> GetConsultingsAsync(DateTime from, DateTime? till, int? workerId = null, int? piece = null);
 
-        public Task<IEnumerable<Consulting>> GetMonthlyConsultingsAsync(string? date);
+        public Task<IList<Consulting>> GetMonthlyConsultingsAsync(string? date);
+
+        public void DeleteConsulting(int id);
+
+        public Task AddOrUpdateConsultingAsync(Consulting consulting);
+
+        public Task<Consulting> GetConsultingAsync(int id);
     }
 }

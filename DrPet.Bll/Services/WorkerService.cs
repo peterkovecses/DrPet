@@ -13,9 +13,9 @@ namespace DrPet.Bll.Services
 {
     public class WorkerService : IWorkerService
     {
-        public WorkerService(DrPetDbContext dbContext) => DbContext = dbContext;
-
         public DrPetDbContext DbContext { get; }
+
+        public WorkerService(DrPetDbContext dbContext) => DbContext = dbContext;        
 
         private Expression<Func<Data.Entities.Worker, Doctor>> DoctorSelector = d => new Doctor
         {
@@ -23,7 +23,6 @@ namespace DrPet.Bll.Services
             Name = d.Name,
             PublicDescription = d.PublicDescription
         };
-
 
         public async Task<IList<Doctor>> GetDoctorsAsync()
         {

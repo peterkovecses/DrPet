@@ -6,23 +6,29 @@ using DrPet.Bll.Interfaces;
 using DrPet.Bll.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DrPet.Web.Pages.Admin.Doctors
+namespace DrPet.Web.Pages.Admin.Consultings
 {
     public class CreateModel : PageModel
     {
+        public IConsultingService ConsultingService { get; }
         public IWorkerService WorkerService { get; }
 
-        public CreateModel(IWorkerService workerService)
+        public CreateModel(IConsultingService consultingService, IWorkerService workerService)
         {
+            ConsultingService = consultingService;
             WorkerService = workerService;
         }
 
         [BindProperty]
-        public Doctor Doctor { get; set; }
+        public Consulting Consulting { get; set; }
 
-        public void OnGet()
+        public SelectList Doctors { get; set; }
+
+        public async Task OnGetAsync()
         {
+            Doctors = new SelectList(await WorkerService.GetDoctorsAsync(), "Id", "Name");                
         }
 
         public async Task<IActionResult> OnPostAsync()
@@ -30,7 +36,7 @@ namespace DrPet.Web.Pages.Admin.Doctors
             if (!ModelState.IsValid)
                 return Page();
 
-            await WorkerService.AddOrUpdateDoctorAsync(Doctor);
+            await ConsultingService.AddOrUpdateConsultingAsync(Consulting);
 
             return RedirectToPage("./Index");
         }
