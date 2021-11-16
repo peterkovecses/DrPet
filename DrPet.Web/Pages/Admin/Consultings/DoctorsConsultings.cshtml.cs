@@ -27,10 +27,17 @@ namespace DrPet.Web.Pages.Admin.Consultings
 
             Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null, id);
 
-            if (!Consultings.Any())
-                return NotFound();
+            //if (!Consultings.Any())
+            //    return NotFound();
 
             return Page();
+        }
+
+        public IActionResult OnPost(int id)
+        {
+            ConsultingService.DeleteConsulting(id);
+
+            return new JsonResult(new { url = "reload" });
         }
     }
 }
