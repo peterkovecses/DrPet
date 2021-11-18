@@ -64,6 +64,19 @@ namespace DrPet.Bll.Services
             return await GetConsultingsAsync(from, till);
         }
 
+        public async Task<Consulting> GetConsultingAsync(DateTime date, int workerId)
+        {
+            var consultings = DbContext.Consultings.Where(c => c.StartOfConsulting <= date);
+
+            consultings = consultings.Where(c => c.EndOfConsulting >= date);
+
+            consultings = consultings.Where(c => c.WorkerId == workerId);
+
+            return await consultings
+                .Select(ConsultingSelector)
+                .SingleOrDefaultAsync();
+        }
+
         public void DeleteConsulting(int id)
         {
             DbContext.Consultings.Remove(new Data.Entities.Consulting { Id = id });
@@ -92,6 +105,6 @@ namespace DrPet.Bll.Services
                 .Where(c => c.Id == id)
                 .Select(ConsultingSelector)
                 .SingleOrDefaultAsync();
-        }
+        }        
     }
 }

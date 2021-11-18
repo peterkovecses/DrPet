@@ -5,28 +5,28 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace DrPet.Web.Pages.Admin.Pets
+namespace DrPet.Web.Pages.Admin.Treatments
 {
     public class DetailsModel : PageModel
     {
-        public IPetService PetService { get; }
+        public ITreatmentService TreatmentService { get; }
 
-        public DetailsModel(IPetService petService)
+        public DetailsModel(ITreatmentService treatmentService)
         {
-            PetService = petService;
+            TreatmentService = treatmentService;
         }
 
         [BindProperty]
-        public Pet Pet { get; set; }
+        public Treatment Treatment { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             if (id == null)
                 return NotFound();
 
-            Pet = await PetService.GetPetAsync(id.Value);
+            Treatment = await TreatmentService.GetTreatmentAsync(id.Value);
 
-            if (Pet == null)
+            if (Treatment == null)
                 return NotFound();
 
             return Page();

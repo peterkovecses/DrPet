@@ -1,0 +1,89 @@
+﻿@page
+@model DrPet.Web.Pages.Admin.Treatments.IndexModel
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h1>Kezelések</h1>
+    <span id="spinner" style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
+    <a asp-page="./Create" class="btn btn-outline-primary">
+        <i class="fas fa-plus"></i>&nbsp;Új kezelés rögzítése
+    </a>
+</div>
+
+<table class="table" id="treatmentTable">
+    <thead>
+        <tr>
+            <th class="col-md-4">
+                @Html.DisplayNameFor(model => model.Treatments[0].Date)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.Treatments[0].TypeName)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.Treatments[0].OwnerName)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.Treatments[0].PetName)
+            </th>
+            <th class="col-md-2">
+                @Html.DisplayNameFor(model => model.Treatments[0].WorkerName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Treatments)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OwnerName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PetName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkerName)
+                </td>
+
+                <td class="d-flex">
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm text-primary" title="Részletek">
+                        <i class="fas fa-info-circle"></i>                  
+                    </a>
+
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm text-primary" title="Szerkesztés">
+                        <i class="far fa-edit"></i>
+                    </a>
+
+                    <form method="post"
+                          data-ajax="true"
+                          data-ajax-method="post"
+                          data-ajax-confirm="Biztosan törölni szeretné a gazdát?"
+                          data-ajax-loading="#spinner"
+                          data-ajax-success="refreshPage">
+                        <input type="hidden" name="id" value="@item.Id">
+                        <button type="submit" class="btn btn-sm text-danger" title="Törlés">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#treatmentTable').dataTable();
+        });
+    </script>
+
+    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+}
+
+

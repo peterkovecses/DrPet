@@ -1,0 +1,62 @@
+﻿@page
+@model DrPet.Web.Pages.Admin.Treatments.DetailsModel
+
+<h1>Kezelés adatlap</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Treatment.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Treatment.Date)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Treatment.TypeName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Treatment.TypeName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Treatment.OwnerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Treatment.OwnerName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Treatment.PetName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Treatment.PetName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Treatment.WorkerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Treatment.WorkerName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Treatment.MedicineName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Treatment.MedicineName)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Treatment.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Treatment.Comment)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Treatment.Id">Szerkesztés</a> |
+    <a asp-page="./Index">Vissza a kezelések listájához</a>
+</div>

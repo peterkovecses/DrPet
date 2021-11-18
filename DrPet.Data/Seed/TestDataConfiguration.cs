@@ -24,7 +24,7 @@ namespace DrPet.Data.Seed
 
             modelBuilder.Entity<Medicine>().HasData(
                 WithAudit(new Medicine { Id = 1, Name = "Probatbicol (350mg)" }),
-                WithAudit(new Medicine { Id = 2, Name = "Placebotinol (0mg)" })
+                WithAudit(new Medicine { Id = 2, Name = "Placebotinol (10mg)" })
                 );
 
             modelBuilder.Entity<TreatmentType>().HasData(

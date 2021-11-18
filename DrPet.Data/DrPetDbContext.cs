@@ -19,6 +19,7 @@ namespace DrPet.Data
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<TreatmentType> TreatmentTypes { get; set; }
+        public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Worker> Workers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -16,7 +16,7 @@ namespace DrPet.Bll.Models
                 var consulting = (Consulting)validationContext.ObjectInstance;
                 DateTime date = Convert.ToDateTime(value);
 
-                if (date > consulting.StartOfConsulting)
+                if (date >= consulting.StartOfConsulting)
                     return ValidationResult.Success;
                 else
                     return new ValidationResult(ErrorMessage);

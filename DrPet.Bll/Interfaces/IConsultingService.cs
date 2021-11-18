@@ -11,6 +11,8 @@ namespace DrPet.Bll.Interfaces
 
         public Task<IList<Consulting>> GetMonthlyConsultingsAsync(string? date);
 
+        public Task<Consulting> GetConsultingAsync(DateTime date, int workerId);
+
         public void DeleteConsulting(int id);
 
         public Task AddOrUpdateConsultingAsync(Consulting consulting);

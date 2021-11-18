@@ -107,5 +107,11 @@ namespace DrPet.Bll.Services
 
             await DbContext.SaveChangesAsync();
         }
+
+        public async Task<int> GetOwnerId(int id)
+        {
+            var petOwnership = await DbContext.PetOwnerships.SingleOrDefaultAsync(po => po.PetId == id);
+            return petOwnership.OwnerId;
+        }
     }
 }
