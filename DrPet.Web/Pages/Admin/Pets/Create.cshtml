@@ -1,0 +1,50 @@
+﻿@page
+@model DrPet.Web.Pages.Admin.Pets.CreateModel
+
+<h1>Állat rögzítése</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Pet.Name" class="control-label"></label>
+                <input asp-for="Pet.Name" class="form-control" />
+                <span asp-validation-for="Pet.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pet.Birthdate" class="control-label"></label>
+                <input asp-for="Pet.Birthdate" type="date" max="9999-12-31" class="form-control" />
+                <span asp-validation-for="Pet.Birthdate" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pet.VarietyId" class="control-label"></label>
+                <select asp-for="Pet.VarietyId" class="form-control" asp-items="Model.Varieties"></select>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pet.Comment" class="control-label"></label>
+                <textarea asp-for="Pet.Comment" class="form-control"></textarea>
+                <span asp-validation-for="Pet.Comment" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Létrehoz" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Vissza a gazdák listájához</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

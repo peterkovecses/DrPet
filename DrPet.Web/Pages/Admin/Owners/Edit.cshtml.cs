@@ -8,12 +8,12 @@ namespace DrPet.Web.Pages.Admin.Owners
 {
     public class EditModel : PageModel
     {
+        public IOwnerService OwnerService { get; }
+
         public EditModel(IOwnerService ownerService)
         {
             OwnerService = ownerService;
-        }
-
-        public IOwnerService OwnerService { get; }
+        }        
 
         [BindProperty]
         public Owner Owner { get; set; }

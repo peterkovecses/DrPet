@@ -1,4 +1,5 @@
 ﻿using DrPet.Data.Entities;
+using DrPet.Data.Seed;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
@@ -12,6 +13,8 @@ namespace DrPet.Data
         public DbSet<Consulting> Consultings { get; set; }
         public DbSet<Owner> Owners { get; set; }
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Species> Species { get; set; }
+        public DbSet<Variety> Varieties { get; set; }
         public DbSet<PetOwnership> PetOwnerships { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
@@ -21,6 +24,8 @@ namespace DrPet.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+            TestDataConfiguration.ConfigureSeedData(modelBuilder);
         }
     }
 }

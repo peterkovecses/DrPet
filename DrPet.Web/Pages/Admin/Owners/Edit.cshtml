@@ -20,7 +20,7 @@
 
             <div class="form-group">
                 <label asp-for="Owner.Birthdate" class="control-label"></label>
-                <input asp-for="Owner.Birthdate" type="date" class="form-control" />
+                <input asp-for="Owner.Birthdate" type="date" max="9999-12-31" class="form-control" />
                 <span asp-validation-for="Owner.Birthdate" class="text-danger"></span>
             </div>
 

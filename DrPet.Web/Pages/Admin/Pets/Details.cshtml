@@ -1,0 +1,44 @@
+﻿@page
+@model DrPet.Web.Pages.Admin.Pets.DetailsModel
+
+<h1>Állat adatlap</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pet.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pet.Birthdate)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet.Birthdate)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pet.VarietyName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet.VarietyName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pet.OwnerName)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet.OwnerName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Pet.Comment)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Pet.Comment)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-page="./Edit" asp-route-id="@Model.Pet.Id">Szerkesztés</a> |
+    <a asp-page="./Index">Vissza az állatok listájához</a>
+</div>
