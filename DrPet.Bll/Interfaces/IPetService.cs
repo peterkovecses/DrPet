@@ -16,8 +16,6 @@ namespace DrPet.Bll.Interfaces
 
         public Task<IList<VarietyDTO>> GetVarietiesAsync();
 
-        public Task AddOrUpdatePeOwnershipAsync(PetDTO pet);
-
         public Task<int> GetOwnerId(int id);
     }
 }

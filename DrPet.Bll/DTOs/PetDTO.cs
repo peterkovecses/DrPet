@@ -30,5 +30,7 @@ namespace DrPet.Bll.DTOs
 
         [Display(Name = "Gazda")]
         public string? OwnerName { get; set; }
+
+        public int PrevOwnerId { get; set; }
     }
 }

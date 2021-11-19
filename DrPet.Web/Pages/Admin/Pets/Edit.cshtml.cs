@@ -22,17 +22,19 @@ namespace DrPet.Web.Pages.Admin.Pets
         public PetDTO Pet { get; set; }
 
         public SelectList Varieties { get; set; }
-        public SelectList PetOwnerships { get; set; }
+        public SelectList Owners { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
             Varieties = new SelectList(await PetService.GetVarietiesAsync(), "Id", "Name");
-            PetOwnerships = new SelectList(await OwnerService.GetOwnersAsync(), "Id", "Name");
+            Owners = new SelectList(await OwnerService.GetOwnersAsync(), "Id", "Name");
 
             if (id == null)
                 return NotFound();
 
             Pet = await PetService.GetPetAsync(id.Value);
+
+            Pet.PrevOwnerId = Pet.OwnerId;
 
             if (Pet == null)
                 return NotFound();            
@@ -46,8 +48,6 @@ namespace DrPet.Web.Pages.Admin.Pets
                 return Page();
 
             await PetService.AddOrUpdatePetAsync(Pet);
-
-            await PetService.AddOrUpdatePeOwnershipAsync(Pet);
 
             return RedirectToPage("./Index");
         }

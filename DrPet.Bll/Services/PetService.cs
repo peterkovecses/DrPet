@@ -29,8 +29,8 @@ namespace DrPet.Bll.Services
             Comment = p.Comment,
             VarietyId = p.VarietyId,
             VarietyName = p.Variety.Name,
-            OwnerId = p.PetOwnerships.Select(po => po.OwnerId).SingleOrDefault(),
-            OwnerName = p.PetOwnerships.Select(po => po.Owner.Name).SingleOrDefault()            
+            OwnerId = p.PetOwnerships.Select(po => po.OwnerId).FirstOrDefault(),
+            OwnerName = p.PetOwnerships.Select(po => po.Owner.Name).FirstOrDefault()            
         };
 
         public async Task<IList<PetDTO>> GetPetsAsync()
@@ -56,19 +56,51 @@ namespace DrPet.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdatePetAsync(PetDTO pet)
-        {
-            EntityEntry<Pet> entry;
-
+        public async Task AddOrUpdatePetAsync(PetDTO petDTO)
+        {            
             // update
-            if (pet.Id != 0)
-                entry = DbContext.Entry(await DbContext.Pets.FindAsync(pet.Id));
+            if (petDTO.Id != 0)
+            {
+                var pet = await DbContext.Pets.FindAsync(petDTO.Id);
+
+                pet.Name = petDTO.Name;
+                pet.Birthdate = petDTO.Birthdate;
+                pet.VarietyId = petDTO.VarietyId;
+                pet.Comment = petDTO.Comment;
+                pet.DateOfUpdate = DateTime.Now;
+                pet.PetOwnerships = await DbContext.PetOwnerships.Where(po => po.PetId == petDTO.Id).ToListAsync();
+
+                var ownership = pet.PetOwnerships.Where(o => o.OwnerId == petDTO.PrevOwnerId).SingleOrDefault();
+
+                ownership.OwnerId = petDTO.OwnerId;
+                ownership.DateOfUpdate = pet.DateOfUpdate;
+            }
+                
             // create
             else
-                entry = DbContext.Add(new Data.Entities.Pet()); // empty entity
+            {
+                var pet = new Pet
+                {
+                    Name = petDTO.Name,
+                    Birthdate = petDTO.Birthdate,
+                    VarietyId = petDTO.VarietyId,
+                    Comment = petDTO.Comment,
+                    DateOfCreation = DateTime.Now
+                };
 
-            entry.CurrentValues.SetValues(pet);            
+                pet.PetOwnerships = new List<PetOwnership>
+                {
+                    new PetOwnership
+                    {
+                        OwnerId = petDTO.OwnerId,
+                        PetId = petDTO.Id,
+                        DateOfCreation = DateTime.Now
+                    }
+                };
 
+                DbContext.Add(pet);
+            }
+                           
             await DbContext.SaveChangesAsync();
         }
 
@@ -84,27 +116,6 @@ namespace DrPet.Bll.Services
                 .ToListAsync())
                 .OrderBy(v => v.Name)
                 .ToList();
-        }
-
-        public async Task AddOrUpdatePeOwnershipAsync(PetDTO pet)
-        {            
-            var petOwnership = await DbContext.PetOwnerships.SingleOrDefaultAsync(po => po.PetId == pet.Id);
-
-            var newPetOwnership = new PetOwnership { PetId = pet.Id, OwnerId = pet.OwnerId };
-
-            // update
-            if (petOwnership != null)
-            {
-                DbContext.PetOwnerships.Remove(petOwnership);
-
-                DbContext.PetOwnerships.Add(newPetOwnership);
-            }
-
-            // create
-            else
-                DbContext.PetOwnerships.Add(newPetOwnership);
-
-            await DbContext.SaveChangesAsync();
         }
 
         public async Task<int> GetOwnerId(int id)

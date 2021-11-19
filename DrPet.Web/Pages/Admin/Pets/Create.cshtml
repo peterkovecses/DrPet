@@ -28,6 +28,11 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="Pet.OwnerId" class="control-label"></label>
+                <select asp-for="Pet.OwnerId" class="form-control" asp-items="Model.Owners"></select>
+            </div>
+
+            <div class="form-group">
                 <label asp-for="Pet.Comment" class="control-label"></label>
                 <textarea asp-for="Pet.Comment" class="form-control"></textarea>
                 <span asp-validation-for="Pet.Comment" class="text-danger"></span>

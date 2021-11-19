@@ -54,55 +54,53 @@ namespace DrPet.Bll.Services
                 .SingleOrDefaultAsync();
         }
 
-        public async Task AddOrUpdateTreatmentAsync(TreatmentDTO treatment, PurchaseDTO? purchase)
+        public async Task AddOrUpdateTreatmentAsync(TreatmentDTO treatmentDTO, PurchaseDTO? purchaseDTO)
         {
             //EntityEntry<Data.Entities.Treatment> entry;
             
             // update
-            if (treatment.Id != 0)
+            if (treatmentDTO.Id != 0)
             {
-                var t = await DbContext.Treatments.FindAsync(treatment.Id);
-                t.TypeId = treatment.TypeId;
-                t.MedicineId = treatment.MedicineId;
-                t.Comment = treatment.Comment;
-
-
+                var treatment = await DbContext.Treatments.FindAsync(treatmentDTO.Id);
+                treatment.TypeId = treatmentDTO.TypeId;
+                treatment.MedicineId = treatmentDTO.MedicineId;
+                treatment.Comment = treatmentDTO.Comment;
             }
 
             // create (if create, purchase is never null)
             else
             {
                 // make a Purchase entity ford the database
-                var p = new Data.Entities.Purchase
+                var purchase = new Data.Entities.Purchase
                 {
-                    Date = purchase.Date,
-                    OwnerId = purchase.OwnerId,
-                    PetId = purchase.PetId,
+                    Date = purchaseDTO.Date,
+                    OwnerId = purchaseDTO.OwnerId,
+                    PetId = purchaseDTO.PetId,
                     Status = PurchaseStatus.WaitinForPayment
                 };
 
-                DbContext.Purchases.Add(p);
+                DbContext.Purchases.Add(purchase);
                 // for get the PurchaseId
                 await DbContext.SaveChangesAsync();
 
-                var purchases = DbContext.Purchases.Where(p => p.OwnerId == purchase.OwnerId);
-                purchases = purchases.Where(p => p.PetId == purchase.PetId);
-                purchases = purchases.Where(p => p.Date == purchase.Date);
+                var purchases = DbContext.Purchases.Where(p => p.OwnerId == purchaseDTO.OwnerId);
+                purchases = purchases.Where(p => p.PetId == purchaseDTO.PetId);
+                purchases = purchases.Where(p => p.Date == purchaseDTO.Date);
 
                 // I have the PurchaseId
-                treatment.PurchaseId = purchases.FirstOrDefault().Id;
+                treatmentDTO.PurchaseId = purchases.FirstOrDefault().Id;
 
                 var t = new Data.Entities.Treatment
                 {
-                    Date = treatment.Date,
-                    MedicineId = treatment.MedicineId,
-                    TypeId = treatment.TypeId,
-                    OwnerId = treatment.OwnerId,
-                    PetId = treatment.PetId,
-                    WorkerId = treatment.WorkerId,
-                    ConsultingId = treatment.ConsultingId,
-                    PurchaseId = treatment.PurchaseId,
-                    Comment = treatment.Comment
+                    Date = treatmentDTO.Date,
+                    MedicineId = treatmentDTO.MedicineId,
+                    TypeId = treatmentDTO.TypeId,
+                    OwnerId = treatmentDTO.OwnerId,
+                    PetId = treatmentDTO.PetId,
+                    WorkerId = treatmentDTO.WorkerId,
+                    ConsultingId = treatmentDTO.ConsultingId,
+                    PurchaseId = treatmentDTO.PurchaseId,
+                    Comment = treatmentDTO.Comment
                 };
 
                 DbContext.Treatments.Add(t);
