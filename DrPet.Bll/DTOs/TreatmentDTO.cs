@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using DrPet.Data;
 
 namespace DrPet.Bll.DTOs
 {
@@ -43,8 +44,8 @@ namespace DrPet.Bll.DTOs
         [Display(Name = "Rendelés azonosító")]
         public int ConsultingId { get; set; }
 
-        [Display(Name = "Vásárlás azonosító")]
-        public int PurchaseId { get; set; }
+        [Display(Name = "Fizetés státusza")]
+        public PurchaseStatus PurchaseStatus { get; set; } = PurchaseStatus.WaitinForPayment;
 
         [Display(Name = "Megjegyzés")]
         public string? Comment { get; set; }

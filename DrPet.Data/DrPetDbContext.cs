@@ -16,7 +16,6 @@ namespace DrPet.Data
         public DbSet<Species> Species { get; set; }
         public DbSet<Variety> Varieties { get; set; }
         public DbSet<PetOwnership> PetOwnerships { get; set; }
-        public DbSet<Purchase> Purchases { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<TreatmentType> TreatmentTypes { get; set; }
         public DbSet<Medicine> Medicines { get; set; }

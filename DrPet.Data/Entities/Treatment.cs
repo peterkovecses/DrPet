@@ -10,7 +10,8 @@ namespace DrPet.Data.Entities
         public DateTime Date { get; set; }
         public int? MedicineId { get; set; }
         public Medicine? Medicine { get; set; }
-        public TreatmentLength? Length { get; set; }        
+        public TreatmentLength? Length { get; set; }
+        public PurchaseStatus PurchaseStatus { get; set; }
 
         public int TypeId { get; set; }
         public TreatmentType Type { get; set; }
@@ -24,8 +25,7 @@ namespace DrPet.Data.Entities
         public Consulting Consulting { get; set; }
         public int? AntecedentId { get; set; }
         public Treatment? Antecedent { get; set; }
-        public int PurchaseId { get; set; }
-        public Purchase Purchase { get; set; }
+        
         public ICollection<Treatment>? Consequences { get; set; }
 
         public override void Configure(EntityTypeBuilder<Treatment> builder)
@@ -34,10 +34,6 @@ namespace DrPet.Data.Entities
 
             builder.HasOne(t => t.Medicine).WithMany(m => m.Treatments)
                 .HasForeignKey(t => t.MedicineId).HasPrincipalKey(m => m.Id)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.HasOne(t => t.Purchase).WithMany(p => p.Treatments)
-                .HasForeignKey(t => t.PurchaseId).HasPrincipalKey(p => p.Id)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(t => t.Consulting).WithMany(c => c.Treatments)

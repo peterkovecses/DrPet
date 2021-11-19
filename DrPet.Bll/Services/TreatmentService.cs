@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Data;
+using DrPet.Data.Entities;
 using DrPet.Bll.Interfaces;
 using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,7 @@ namespace DrPet.Bll.Services
             DbContext = dbContext;
         }
 
-        private Expression<Func<Data.Entities.Treatment, TreatmentDTO>> TreatmentSelector = t => new TreatmentDTO
+        private Expression<Func<Treatment, TreatmentDTO>> TreatmentSelector = t => new TreatmentDTO
         {
             Id = t.Id,
             Date = t.Date,
@@ -34,6 +35,7 @@ namespace DrPet.Bll.Services
             WorkerId = t.WorkerId,
             WorkerName = t.Worker.Name,            
             ConsultingId = t.ConsultingId,
+            PurchaseStatus = t.PurchaseStatus,
             Comment = t.Comment
         };
 
@@ -54,9 +56,8 @@ namespace DrPet.Bll.Services
                 .SingleOrDefaultAsync();
         }
 
-        public async Task AddOrUpdateTreatmentAsync(TreatmentDTO treatmentDTO, PurchaseDTO? purchaseDTO)
+        public async Task AddOrUpdateTreatmentAsync(TreatmentDTO treatmentDTO)
         {
-            //EntityEntry<Data.Entities.Treatment> entry;
             
             // update
             if (treatmentDTO.Id != 0)
@@ -67,30 +68,10 @@ namespace DrPet.Bll.Services
                 treatment.Comment = treatmentDTO.Comment;
             }
 
-            // create (if create, purchase is never null)
+            // create
             else
             {
-                // make a Purchase entity ford the database
-                var purchase = new Data.Entities.Purchase
-                {
-                    Date = purchaseDTO.Date,
-                    OwnerId = purchaseDTO.OwnerId,
-                    PetId = purchaseDTO.PetId,
-                    Status = PurchaseStatus.WaitinForPayment
-                };
-
-                DbContext.Purchases.Add(purchase);
-                // for get the PurchaseId
-                await DbContext.SaveChangesAsync();
-
-                var purchases = DbContext.Purchases.Where(p => p.OwnerId == purchaseDTO.OwnerId);
-                purchases = purchases.Where(p => p.PetId == purchaseDTO.PetId);
-                purchases = purchases.Where(p => p.Date == purchaseDTO.Date);
-
-                // I have the PurchaseId
-                treatmentDTO.PurchaseId = purchases.FirstOrDefault().Id;
-
-                var t = new Data.Entities.Treatment
+                var treatment = new Treatment
                 {
                     Date = treatmentDTO.Date,
                     MedicineId = treatmentDTO.MedicineId,
@@ -99,11 +80,11 @@ namespace DrPet.Bll.Services
                     PetId = treatmentDTO.PetId,
                     WorkerId = treatmentDTO.WorkerId,
                     ConsultingId = treatmentDTO.ConsultingId,
-                    PurchaseId = treatmentDTO.PurchaseId,
+                    PurchaseStatus = treatmentDTO.PurchaseStatus,
                     Comment = treatmentDTO.Comment
                 };
 
-                DbContext.Treatments.Add(t);
+                DbContext.Treatments.Add(treatment);
             }
 
             await DbContext.SaveChangesAsync();           
@@ -111,7 +92,7 @@ namespace DrPet.Bll.Services
 
         public void DeleteTreatment(int id)
         {
-            DbContext.Treatments.Remove(new Data.Entities.Treatment { Id = id });
+            DbContext.Treatments.Remove(new Treatment { Id = id });
             DbContext.SaveChanges();
         }
 

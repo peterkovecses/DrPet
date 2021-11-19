@@ -14,7 +14,6 @@ namespace DrPet.Data.Entities
         public DateTime Birthdate { get; set; }
         public string Location { get; set; }
 
-        public ICollection<Purchase> Purchases { get; set; }
         public ICollection<Treatment> Treatments { get; set; }
         public ICollection<PetOwnership> PetOwnerships { get; set; }
 

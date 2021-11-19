@@ -12,7 +12,7 @@ namespace DrPet.Bll.Interfaces
 
         public void DeleteTreatment(int id);
 
-        public Task AddOrUpdateTreatmentAsync(TreatmentDTO treatment, PurchaseDTO purchase);
+        public Task AddOrUpdateTreatmentAsync(TreatmentDTO treatment);
 
         public Task<IList<MedicineDTO>> GetMedicinesAsync();
 

@@ -14,7 +14,6 @@ namespace DrPet.Data.Entities
         public TreatmentStatus Status { get; set; }
 
         public ICollection<PetOwnership> PetOwnerships { get; set; }
-        public ICollection<Purchase> Purchases { get; set; }
         public ICollection<Treatment> Treatments { get; set; }
 
         public override void Configure(EntityTypeBuilder<Pet> builder)

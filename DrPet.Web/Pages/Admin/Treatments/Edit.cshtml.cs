@@ -44,7 +44,7 @@ namespace DrPet.Web.Pages.Admin.Treatments
             if (!ModelState.IsValid)
                 return Page();
 
-            await TreatmentService.AddOrUpdateTreatmentAsync(Treatment, null);
+            await TreatmentService.AddOrUpdateTreatmentAsync(Treatment);
 
             return RedirectToPage("./Index");
         }

@@ -65,9 +65,8 @@ namespace DrPet.Web.Pages.Admin.Treatments
             // get the pet owner's id
             Treatment.OwnerId = await PetService.GetOwnerId(Treatment.PetId);
 
-            var purchase = new PurchaseDTO { Date = Treatment.Date, OwnerId = Treatment.OwnerId, PetId = Treatment.PetId };
 
-            await TreatmentService.AddOrUpdateTreatmentAsync(Treatment, purchase);
+            await TreatmentService.AddOrUpdateTreatmentAsync(Treatment);
 
             return RedirectToPage("./Index");
         }
