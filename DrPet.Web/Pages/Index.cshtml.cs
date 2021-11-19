@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 
 namespace DrPet.Web.Pages
 {
@@ -20,8 +20,8 @@ namespace DrPet.Web.Pages
             ConsultingService = consultingService;
         }        
 
-        public IEnumerable<Doctor> Doctors { get; private set; }
-        public IEnumerable<Consulting> Consultings { get; private set; }
+        public IEnumerable<DoctorDTO> Doctors { get; private set; }
+        public IEnumerable<ConsultingDTO> Consultings { get; private set; }
 
         public async Task OnGetAsync()
         {

@@ -1,9 +1,9 @@
 ﻿using DrPet.Data;
 using System.ComponentModel.DataAnnotations;
 
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public class Doctor
+    public class DoctorDTO
     {
         public int Id { get; set; }
 

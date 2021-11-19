@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Data;
+using DrPet.Data.Entities;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -20,7 +21,7 @@ namespace DrPet.Bll.Services
             DbContext = dbContext;
         }
 
-        private Expression<Func<Data.Entities.Pet, Pet>> PetSelector = p => new Pet
+        private Expression<Func<Pet, PetDTO>> PetSelector = p => new PetDTO
         {
             Id = p.Id,
             Name = p.Name,
@@ -32,17 +33,16 @@ namespace DrPet.Bll.Services
             OwnerName = p.PetOwnerships.Select(po => po.Owner.Name).SingleOrDefault()            
         };
 
-        public async Task<IList<Pet>> GetPetsAsync()
+        public async Task<IList<PetDTO>> GetPetsAsync()
         {
-            var pets = DbContext.Pets;
-            return (await pets
+            return (await DbContext.Pets
                 .Select(PetSelector)
                 .ToListAsync())
                 .OrderBy(p => p.Name)
                 .ToList();
         }        
 
-        public async Task<Pet> GetPetAsync(int id)
+        public async Task<PetDTO> GetPetAsync(int id)
         {
             return await DbContext.Pets
                 .Where(p => p.Id == id)
@@ -56,9 +56,9 @@ namespace DrPet.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdatePetAsync(Pet pet)
+        public async Task AddOrUpdatePetAsync(PetDTO pet)
         {
-            EntityEntry<Data.Entities.Pet> entry;
+            EntityEntry<Pet> entry;
 
             // update
             if (pet.Id != 0)
@@ -72,11 +72,10 @@ namespace DrPet.Bll.Services
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task<IList<Variety>> GetVarietiesAsync()
+        public async Task<IList<VarietyDTO>> GetVarietiesAsync()
         {
-            var varieties = DbContext.Varieties;
-            return (await varieties
-                .Select(v => new Variety
+            return (await DbContext.Varieties
+                .Select(v => new VarietyDTO
                 { 
                     Id = v.Id, 
                     Name = v.Name, 
@@ -87,11 +86,11 @@ namespace DrPet.Bll.Services
                 .ToList();
         }
 
-        public async Task AddOrUpdatePeOwnershipAsync(Pet pet)
+        public async Task AddOrUpdatePeOwnershipAsync(PetDTO pet)
         {            
             var petOwnership = await DbContext.PetOwnerships.SingleOrDefaultAsync(po => po.PetId == pet.Id);
 
-            var newPetOwnership = new Data.Entities.PetOwnership { PetId = pet.Id, OwnerId = pet.OwnerId };
+            var newPetOwnership = new PetOwnership { PetId = pet.Id, OwnerId = pet.OwnerId };
 
             // update
             if (petOwnership != null)

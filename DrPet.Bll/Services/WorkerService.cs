@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Data;
+using DrPet.Data.Entities;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.Helpers;
+using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -17,36 +19,25 @@ namespace DrPet.Bll.Services
 
         public WorkerService(DrPetDbContext dbContext) => DbContext = dbContext;        
 
-        private Expression<Func<Data.Entities.Worker, Doctor>> DoctorSelector = d => new Doctor
+        private Expression<Func<Worker, DoctorDTO>> DoctorSelector = d => new DoctorDTO
         {
             Id = d.Id,
             Name = d.Name,
             PublicDescription = d.PublicDescription
         };
 
-        public async Task<IList<Doctor>> GetDoctorsAsync()
+        public async Task<IList<DoctorDTO>> GetDoctorsAsync()
         {
-            var doctors = DbContext.Workers.Where(w => w.Position == Position.Doctor);
-            return (await doctors
-                .Select(d => new Doctor { Id = d.Id, Name = d.Name, PublicDescription = d.PublicDescription,
-                    ShortPublicDescription = ShortPublicDescription(d.PublicDescription)
+            return (await DbContext.Workers.Where(w => w.Position == Position.Doctor)
+                .Select(d => new DoctorDTO { Id = d.Id, Name = d.Name, PublicDescription = d.PublicDescription,
+                    ShortPublicDescription = StringHelper.Shorten(d.PublicDescription, 200)
                 })
                 .ToListAsync())
                 .OrderBy(d => d.Name)
                 .ToList();
         }
 
-        public static string ShortPublicDescription(string publicDescription)
-        {
-            if (publicDescription == null)
-                return "";
-            if (publicDescription.Length < 201)
-                return publicDescription;
-
-            return publicDescription.Substring(0, 200) + "...";
-        }
-
-        public async Task<Doctor> GetDoctorAsync(int id)
+        public async Task<DoctorDTO> GetDoctorAsync(int id)
         {
             return await DbContext.Workers
                 .Where(w => w.Id == id)
@@ -55,20 +46,20 @@ namespace DrPet.Bll.Services
         }
         public void DeleteWorker(int id)
         {
-            DbContext.Workers.Remove(new Data.Entities.Worker { Id = id });
+            DbContext.Workers.Remove(new Worker { Id = id });
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdateDoctorAsync(Doctor doctor)
+        public async Task AddOrUpdateDoctorAsync(DoctorDTO doctor)
         {
-            EntityEntry<Data.Entities.Worker> entry;
+            EntityEntry<Worker> entry;
 
             // update
             if (doctor.Id != 0)
                 entry = DbContext.Entry(await DbContext.Workers.FindAsync(doctor.Id));
             // create
             else                
-                entry = DbContext.Add(new Data.Entities.Worker()); // empty entity
+                entry = DbContext.Add(new Worker()); // empty entity
 
             entry.CurrentValues.SetValues(doctor);
 

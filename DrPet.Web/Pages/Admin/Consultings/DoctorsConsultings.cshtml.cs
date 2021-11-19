@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -18,7 +18,7 @@ namespace DrPet.Web.Pages.Admin.Consultings
             ConsultingService = consultingService;
         }
 
-        public IList<Consulting> Consultings { get; set; }
+        public IList<ConsultingDTO> Consultings { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

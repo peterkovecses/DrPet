@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Data;
+using DrPet.Data.Entities;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
@@ -17,7 +18,7 @@ namespace DrPet.Bll.Services
 
         public ConsultingService(DrPetDbContext dbContext) => DbContext = dbContext;
 
-        private Expression<Func<Data.Entities.Consulting, Consulting>> ConsultingSelector = c => new Consulting
+        private Expression<Func<Consulting, ConsultingDTO>> ConsultingSelector = c => new ConsultingDTO
         {
             Id = c.Id,
             StartOfConsulting = c.StartOfConsulting,
@@ -26,7 +27,7 @@ namespace DrPet.Bll.Services
             WorkerName = c.Worker.Name
         };
 
-        public async Task<IList<Consulting>> GetConsultingsAsync(DateTime from, DateTime? till, int? workerId = null, int? piece = null)
+        public async Task<IList<ConsultingDTO>> GetConsultingsAsync(DateTime from, DateTime? till, int? workerId = null, int? piece = null)
         {
             var consultings = DbContext.Consultings.Where(c => c.StartOfConsulting >= from);
 
@@ -46,7 +47,7 @@ namespace DrPet.Bll.Services
                 .ToListAsync();
         }        
 
-        public async Task<IList<Consulting>> GetMonthlyConsultingsAsync(string? date)
+        public async Task<IList<ConsultingDTO>> GetMonthlyConsultingsAsync(string? date)
         {
             DateTime from;
             DateTime till;
@@ -64,7 +65,7 @@ namespace DrPet.Bll.Services
             return await GetConsultingsAsync(from, till);
         }
 
-        public async Task<Consulting> GetConsultingAsync(DateTime date, int workerId)
+        public async Task<ConsultingDTO> GetConsultingAsync(DateTime date, int workerId)
         {
             var consultings = DbContext.Consultings.Where(c => c.StartOfConsulting <= date);
 
@@ -79,27 +80,27 @@ namespace DrPet.Bll.Services
 
         public void DeleteConsulting(int id)
         {
-            DbContext.Consultings.Remove(new Data.Entities.Consulting { Id = id });
+            DbContext.Consultings.Remove(new Consulting { Id = id });
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdateConsultingAsync(Consulting consulting)
+        public async Task AddOrUpdateConsultingAsync(ConsultingDTO consulting)
         {
-            EntityEntry<Data.Entities.Consulting> entry;
+            EntityEntry<Consulting> entry;
 
             // update
             if (consulting.Id != 0)
                 entry = DbContext.Entry(await DbContext.Consultings.FindAsync(consulting.Id));
             // create
             else
-                entry = DbContext.Add(new Data.Entities.Consulting()); // empty entity
+                entry = DbContext.Add(new Consulting()); // empty entity
 
             entry.CurrentValues.SetValues(consulting);
 
             await DbContext.SaveChangesAsync();
         }
 
-        public async Task<Consulting> GetConsultingAsync(int id)
+        public async Task<ConsultingDTO> GetConsultingAsync(int id)
         {
             return await DbContext.Consultings
                 .Where(c => c.Id == id)

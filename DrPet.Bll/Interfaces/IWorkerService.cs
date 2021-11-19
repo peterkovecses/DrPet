@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 
 namespace DrPet.Bll.Interfaces
 {
     public interface IWorkerService
     {
-        public Task<IList<Doctor>> GetDoctorsAsync();
+        public Task<IList<DoctorDTO>> GetDoctorsAsync();
 
-        public Task<Doctor> GetDoctorAsync(int id);
+        public Task<DoctorDTO> GetDoctorAsync(int id);
 
         public void DeleteWorker(int id);
 
-        public Task AddOrUpdateDoctorAsync(Doctor doctor);
+        public Task AddOrUpdateDoctorAsync(DoctorDTO doctor);
     }
 }

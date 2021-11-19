@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,7 +16,7 @@ namespace DrPet.Web.Pages.Admin.Pets
             PetService = petService;
         }
 
-        public IList<Pet> Pets { get; set; }
+        public IList<PetDTO> Pets { get; set; }
 
         public async Task OnGetAsync()
         {

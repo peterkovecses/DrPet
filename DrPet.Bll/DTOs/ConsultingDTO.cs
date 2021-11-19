@@ -1,18 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public class Consulting
+    public class ConsultingDTO
     {
         public int Id { get; set; }
 
-        [MinStartingTime(ErrorMessage = "Az időpont nem lehet kisebb mint a mostani idő.")]
+        [MinStartingTimeDTO(ErrorMessage = "Az időpont nem lehet kisebb mint a mostani idő.")]
         [Display(Name = "Rendelés kezdete")]
         public DateTime StartOfConsulting { get; set; }
 
-        [MinEndingTime(ErrorMessage = "Az időpont nem lehet kisebb mint a rendelés kezdetének ideje.")]
+        [MinEndingTimeDTO(ErrorMessage = "Az időpont nem lehet kisebb mint a rendelés kezdetének ideje.")]
         [Display(Name = "Rendelés vége")]
         public DateTime EndOfConsulting { get; set; }
 

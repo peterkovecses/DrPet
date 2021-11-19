@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 
 namespace DrPet.Bll.Interfaces
 {
     public interface IOwnerService
     {
-        public Task<IList<Owner>> GetOwnersAsync();
+        public Task<IList<OwnerDTO>> GetOwnersAsync();
 
-        public Task<Owner> GetOwnerAsync(int id);
+        public Task<OwnerDTO> GetOwnerAsync(int id);
 
         public void DeleteOwner(int id);
 
-        public Task AddOrUpdateOwnerAsync(Owner owner);
+        public Task AddOrUpdateOwnerAsync(OwnerDTO owner);
     }
 }

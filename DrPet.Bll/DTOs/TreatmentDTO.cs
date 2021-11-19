@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public class Treatment
+    public class TreatmentDTO
     {
         public int Id { get; set; }
 

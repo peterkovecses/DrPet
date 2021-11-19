@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,7 +16,7 @@ namespace DrPet.Web.Pages.Admin.Doctors
         }
 
         [BindProperty]
-        public Doctor Doctor { get; set; }
+        public DoctorDTO Doctor { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

@@ -1,9 +1,8 @@
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace DrPet.Web.Pages.Admin.Treatments
 {
@@ -17,7 +16,7 @@ namespace DrPet.Web.Pages.Admin.Treatments
         }
 
         [BindProperty]
-        public Treatment Treatment { get; set; }
+        public TreatmentDTO Treatment { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

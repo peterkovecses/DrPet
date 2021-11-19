@@ -4,9 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Data;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
 
 namespace DrPet.Bll.Services
@@ -20,7 +19,7 @@ namespace DrPet.Bll.Services
             DbContext = dbContext;
         }
 
-        private Expression<Func<Data.Entities.Treatment, Treatment>> TreatmentSelector = t => new Treatment
+        private Expression<Func<Data.Entities.Treatment, TreatmentDTO>> TreatmentSelector = t => new TreatmentDTO
         {
             Id = t.Id,
             Date = t.Date,
@@ -38,17 +37,16 @@ namespace DrPet.Bll.Services
             Comment = t.Comment
         };
 
-        public async Task<IList<Treatment>> GetTreatmentsAsync()
+        public async Task<IList<TreatmentDTO>> GetTreatmentsAsync()
         {
-            var treatments = DbContext.Treatments;
-            return (await treatments
+            return (await DbContext.Treatments
                 .Select(TreatmentSelector)
                 .ToListAsync())
                 .OrderByDescending(t => t.Date)
                 .ToList();
         }
 
-        public async Task<Treatment> GetTreatmentAsync(int id)
+        public async Task<TreatmentDTO> GetTreatmentAsync(int id)
         {
             return await DbContext.Treatments
                 .Where(t => t.Id == id)
@@ -56,7 +54,7 @@ namespace DrPet.Bll.Services
                 .SingleOrDefaultAsync();
         }
 
-        public async Task AddOrUpdateTreatmentAsync(Treatment treatment, Purchase? purchase)
+        public async Task AddOrUpdateTreatmentAsync(TreatmentDTO treatment, PurchaseDTO? purchase)
         {
             //EntityEntry<Data.Entities.Treatment> entry;
             
@@ -80,7 +78,7 @@ namespace DrPet.Bll.Services
                     Date = purchase.Date,
                     OwnerId = purchase.OwnerId,
                     PetId = purchase.PetId,
-                    Status = Data.PurchaseStatus.WaitinForPayment
+                    Status = PurchaseStatus.WaitinForPayment
                 };
 
                 DbContext.Purchases.Add(p);
@@ -119,11 +117,10 @@ namespace DrPet.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public async Task<IList<Medicine>> GetMedicinesAsync()
+        public async Task<IList<MedicineDTO>> GetMedicinesAsync()
         {
-            var medicines = DbContext.Medicines;
-            return (await medicines
-                .Select(m => new Medicine
+            return (await DbContext.Medicines
+                .Select(m => new MedicineDTO
                 {
                     Id = m.Id,
                     Name = m.Name
@@ -133,11 +130,10 @@ namespace DrPet.Bll.Services
                 .ToList();
         }
 
-        public async Task<IList<TreatmentType>> GetTreatmentTypesAsync()
+        public async Task<IList<TreatmentTypeDTO>> GetTreatmentTypesAsync()
         {
-            var treatmentTypes = DbContext.TreatmentTypes;
-            return (await treatmentTypes
-                .Select(t => new TreatmentType
+            return (await DbContext.TreatmentTypes
+                .Select(t => new TreatmentTypeDTO
                 {
                     Id = t.Id,
                     Name = t.Name,

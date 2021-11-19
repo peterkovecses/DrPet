@@ -1,28 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DrPet.Data;
-using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System.Linq.Expressions;
+using DrPet.Bll.DTOs;
 
 namespace DrPet.Bll.Interfaces
 {
     public interface ITreatmentService
     {
-        public Task<IList<Treatment>> GetTreatmentsAsync();
+        public Task<IList<TreatmentDTO>> GetTreatmentsAsync();
 
-        public Task<Treatment> GetTreatmentAsync(int id);
+        public Task<TreatmentDTO> GetTreatmentAsync(int id);
 
         public void DeleteTreatment(int id);
 
-        public Task AddOrUpdateTreatmentAsync(Treatment treatment, Purchase purchase);
+        public Task AddOrUpdateTreatmentAsync(TreatmentDTO treatment, PurchaseDTO purchase);
 
-        public Task<IList<Medicine>> GetMedicinesAsync();
+        public Task<IList<MedicineDTO>> GetMedicinesAsync();
 
-        public Task<IList<TreatmentType>> GetTreatmentTypesAsync();
+        public Task<IList<TreatmentTypeDTO>> GetTreatmentTypesAsync();
     }
 }

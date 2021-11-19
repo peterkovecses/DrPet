@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public class TreatmentType
+    public class TreatmentTypeDTO
     {
         public int Id { get; set; }
 

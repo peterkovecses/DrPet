@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,7 +16,7 @@ namespace DrPet.Web.Pages.Admin.Treatments
             TreatmentService = treatmentService;
         }
 
-        public IList<Treatment> Treatments { get; set; }        
+        public IList<TreatmentDTO> Treatments { get; set; }        
 
         public async Task OnGetAsync()
         {

@@ -1,7 +1,7 @@
 ﻿
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public class Variety
+    public class VarietyDTO
     {
         public int Id { get; set; }
         public string? Name { get; set; }

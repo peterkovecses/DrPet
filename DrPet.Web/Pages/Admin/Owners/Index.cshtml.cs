@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
@@ -16,7 +16,7 @@ namespace DrPet.Web.Pages.Admin.Owners
             OwnerService = ownerService;
         }
 
-        public IList<Owner> Owners { get; set; }
+        public IList<OwnerDTO> Owners { get; set; }
 
         public async Task OnGetAsync()
         {

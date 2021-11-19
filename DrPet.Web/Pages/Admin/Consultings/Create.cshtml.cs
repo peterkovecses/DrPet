@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -19,7 +19,7 @@ namespace DrPet.Web.Pages.Admin.Consultings
         }
 
         [BindProperty]
-        public Consulting Consulting { get; set; }
+        public ConsultingDTO Consulting { get; set; }
 
         public SelectList Doctors { get; set; }
 

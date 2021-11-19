@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public class Owner
+    public class PetDTO
     {
         public int Id { get; set; }
 
@@ -16,11 +16,19 @@ namespace DrPet.Bll.Models
         [Display(Name = "Születési dátum")]
         public DateTime Birthdate { get; set; }
 
-        [Required]
-        [Display(Name = "Lokáció")]
-        public string? Location { get; set; }
-
         [Display(Name = "Megjegyzés")]
         public string? Comment { get; set; }
+
+        [Display(Name = "Fajta")]
+        public int VarietyId { get; set; }
+
+        [Display(Name = "Fajta")]
+        public string? VarietyName { get; set; }
+
+        [Display(Name = "Gazda")]
+        public int OwnerId { get; set; }
+
+        [Display(Name = "Gazda")]
+        public string? OwnerName { get; set; }
     }
 }

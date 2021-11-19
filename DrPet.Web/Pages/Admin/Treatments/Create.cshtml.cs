@@ -1,7 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -24,7 +24,7 @@ namespace DrPet.Web.Pages.Admin.Treatments
         }
 
         [BindProperty]
-        public Treatment Treatment { get; set; }
+        public TreatmentDTO Treatment { get; set; }
 
         public SelectList Medicines { get; set; }
         public SelectList TreatmentTypes { get; set; }
@@ -55,7 +55,7 @@ namespace DrPet.Web.Pages.Admin.Treatments
             // if not in consulting time (make a new consulting for only this treatment)
             else
             {
-                consulting = new Consulting { StartOfConsulting = Treatment.Date, EndOfConsulting = Treatment.Date, WorkerId = Treatment.WorkerId };
+                consulting = new ConsultingDTO { StartOfConsulting = Treatment.Date, EndOfConsulting = Treatment.Date, WorkerId = Treatment.WorkerId };
                 await ConsultingService.AddOrUpdateConsultingAsync(consulting);
 
                 consulting = await ConsultingService.GetConsultingAsync(Treatment.Date, Treatment.WorkerId);
@@ -65,7 +65,7 @@ namespace DrPet.Web.Pages.Admin.Treatments
             // get the pet owner's id
             Treatment.OwnerId = await PetService.GetOwnerId(Treatment.PetId);
 
-            var purchase = new Purchase { Date = Treatment.Date, OwnerId = Treatment.OwnerId, PetId = Treatment.PetId };
+            var purchase = new PurchaseDTO { Date = Treatment.Date, OwnerId = Treatment.OwnerId, PetId = Treatment.PetId };
 
             await TreatmentService.AddOrUpdateTreatmentAsync(Treatment, purchase);
 

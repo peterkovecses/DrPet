@@ -1,23 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 
 namespace DrPet.Bll.Interfaces
 {
     public interface IPetService
     {
-        public Task<IList<Pet>> GetPetsAsync();
+        public Task<IList<PetDTO>> GetPetsAsync();
 
-        public Task<Pet> GetPetAsync(int id);
+        public Task<PetDTO> GetPetAsync(int id);
 
         public void DeletePet(int id);
 
-        public Task AddOrUpdatePetAsync(Pet pet);
+        public Task AddOrUpdatePetAsync(PetDTO pet);
 
-        public Task<IList<Variety>> GetVarietiesAsync();
+        public Task<IList<VarietyDTO>> GetVarietiesAsync();
 
-        public Task AddOrUpdatePeOwnershipAsync(Pet pet);
+        public Task AddOrUpdatePeOwnershipAsync(PetDTO pet);
 
         public Task<int> GetOwnerId(int id);
     }

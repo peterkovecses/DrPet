@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 
 namespace DrPet.Web.Pages
 {
@@ -19,7 +19,7 @@ namespace DrPet.Web.Pages
 
         public string ActualMonth { get; set; }
 
-        public IList<Consulting> Consultings { get; private set; }
+        public IList<ConsultingDTO> Consultings { get; private set; }
 
         public async Task OnGetAsync(string? date)
         {

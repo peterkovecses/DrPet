@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -17,7 +17,7 @@ namespace DrPet.Web.Pages.Admin.Pets
         }
 
         [BindProperty]
-        public Pet Pet { get; set; }
+        public PetDTO Pet { get; set; }
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {

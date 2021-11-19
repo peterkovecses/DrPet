@@ -1,8 +1,7 @@
 ﻿
-
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public enum PurchaseStatus
+    public enum PurchaseStatusDTO
     {
         Reserve = 1,
         WaitinForPayment = 2,

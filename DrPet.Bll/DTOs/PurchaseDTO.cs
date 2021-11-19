@@ -1,15 +1,14 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
-namespace DrPet.Bll.Models
+namespace DrPet.Bll.DTOs
 {
-    public class Purchase
+    public class PurchaseDTO
     {
         public int Id { get; set; }
 
         public DateTime Date { get; set; }
 
-        public PurchaseStatus Status { get; set; } = PurchaseStatus.WaitinForPayment;
+        public PurchaseStatusDTO Status { get; set; } = PurchaseStatusDTO.WaitinForPayment;
 
         public int OwnerId { get; set; }
 

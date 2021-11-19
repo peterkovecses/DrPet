@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DrPet.Data;
+using DrPet.Data.Entities;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -20,7 +21,7 @@ namespace DrPet.Bll.Services
             DbContext = dbContext;
         }
 
-        private Expression<Func<Data.Entities.Owner, Owner>> OwnerSelector = o => new Owner
+        private Expression<Func<Owner, OwnerDTO>> OwnerSelector = o => new OwnerDTO
         {
             Id = o.Id,
             Name = o.Name,
@@ -30,17 +31,16 @@ namespace DrPet.Bll.Services
             
         };
 
-        public async Task<IList<Owner>> GetOwnersAsync()
+        public async Task<IList<OwnerDTO>> GetOwnersAsync()
         {
-            var owners = DbContext.Owners;
-            return (await owners
+            return (await DbContext.Owners
                 .Select(OwnerSelector)
                 .ToListAsync())
                 .OrderBy(o => o.Name)
                 .ToList();
         }
 
-        public async Task<Owner> GetOwnerAsync(int id)
+        public async Task<OwnerDTO> GetOwnerAsync(int id)
         {
             return await DbContext.Owners
                 .Where(o => o.Id == id)
@@ -48,16 +48,16 @@ namespace DrPet.Bll.Services
                 .SingleOrDefaultAsync();
         }
 
-        public async Task AddOrUpdateOwnerAsync(Owner owner)
+        public async Task AddOrUpdateOwnerAsync(OwnerDTO owner)
         {
-            EntityEntry<Data.Entities.Owner> entry;
+            EntityEntry<Owner> entry;
 
             // update
             if (owner.Id != 0)
                 entry = DbContext.Entry(await DbContext.Owners.FindAsync(owner.Id));
             // create
             else
-                entry = DbContext.Add(new Data.Entities.Owner()); // empty entity
+                entry = DbContext.Add(new Owner()); // empty entity
 
             entry.CurrentValues.SetValues(owner);
 
@@ -66,7 +66,7 @@ namespace DrPet.Bll.Services
 
         public void DeleteOwner(int id)
         {
-            DbContext.Owners.Remove(new Data.Entities.Owner { Id = id });
+            DbContext.Owners.Remove(new Owner { Id = id });
             DbContext.SaveChanges();
         }               
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DrPet.Bll.Interfaces;
-using DrPet.Bll.Models;
+using DrPet.Bll.DTOs;
 
 namespace DrPet.Web.Pages.Consultings
 {
@@ -13,7 +13,7 @@ namespace DrPet.Web.Pages.Consultings
 
         public DoctorsConsultingsModel(IConsultingService consultingService) => ConsultingService = consultingService;        
 
-        public IEnumerable<Consulting> Consultings { get; private set; }
+        public IEnumerable<ConsultingDTO> Consultings { get; private set; }
 
         public async Task OnGetAsync(int id)
         {            
