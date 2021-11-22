@@ -1,9 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
+using DrPet.Bll.DTOs;
 
-namespace DrPet.Bll.DTOs
+namespace DrPet.Bll.MyValidations
 {
-    public class MinEndingTimeDTO : ValidationAttribute
+    public class MinEndingTime : ValidationAttribute
     {
         protected override ValidationResult IsValid(object value, ValidationContext validationContext)
         {
@@ -18,7 +19,7 @@ namespace DrPet.Bll.DTOs
                     return new ValidationResult(ErrorMessage);
             }
 
-            return new ValidationResult("Az időpont kiválasztása kötelező.");
+            return new ValidationResult("A mező kitöltése kötelező.");
         }
     }
 }

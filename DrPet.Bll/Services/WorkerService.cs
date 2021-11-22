@@ -30,7 +30,7 @@ namespace DrPet.Bll.Services
         {
             return (await DbContext.Workers.Where(w => w.Position == Position.Doctor)
                 .Select(d => new DoctorDTO { Id = d.Id, Name = d.Name, PublicDescription = d.PublicDescription,
-                    ShortPublicDescription = StringHelper.Shorten(d.PublicDescription, 200)
+                    ShortPublicDescription = d.PublicDescription.Shorten(200) // Helpers\StringHelper.cs
                 })
                 .ToListAsync())
                 .OrderBy(d => d.Name)
@@ -56,14 +56,19 @@ namespace DrPet.Bll.Services
 
             // update
             if (doctor.Id != 0)
-                entry = DbContext.Entry(await DbContext.Workers.FindAsync(doctor.Id));
+            {
+                var worker = await DbContext.Workers.FindAsync(doctor.Id);
+                worker.DateOfUpdate = DateTime.Now;
+                entry = DbContext.Entry(worker);
+            }
+            
             // create
             else                
-                entry = DbContext.Add(new Worker()); // empty entity
+                entry = DbContext.Add(new Worker { DateOfCreation = DateTime.Now }); // empty entity
 
             entry.CurrentValues.SetValues(doctor);
 
-            await DbContext.SaveChangesAsync();
+            await DbContext.SaveChangesAsync();{}
         }
     }
 }

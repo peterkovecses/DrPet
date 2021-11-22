@@ -60,14 +60,18 @@ namespace DrPet.Bll.Services
             // update
             if (petDTO.Id != 0)
             {
-                var pet = await DbContext.Pets.FindAsync(petDTO.Id);
+                // var pet = await DbContext.Pets.FindAsync(petDTO.Id);
+
+                var pet = await DbContext.Pets.Include(p => p.PetOwnerships).Where(p => p.Id == petDTO.Id).SingleAsync();
+
 
                 pet.Name = petDTO.Name;
                 pet.Birthdate = petDTO.Birthdate;
                 pet.VarietyId = petDTO.VarietyId;
                 pet.Comment = petDTO.Comment;
                 pet.DateOfUpdate = DateTime.Now;
-                pet.PetOwnerships = await DbContext.PetOwnerships.Where(po => po.PetId == petDTO.Id).ToListAsync();
+
+                // pet.PetOwnerships = await DbContext.PetOwnerships.Where(po => po.PetId == petDTO.Id).ToListAsync();
 
                 var ownership = pet.PetOwnerships.Where(o => o.OwnerId == petDTO.PrevOwnerId).SingleOrDefault();
 

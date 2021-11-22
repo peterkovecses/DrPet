@@ -28,7 +28,7 @@ namespace DrPet.Bll.Services
             Birthdate = o.Birthdate,
             Location = o.Location,
             Comment = o.Comment
-            
+
         };
 
         public async Task<IList<OwnerDTO>> GetOwnersAsync()
@@ -48,18 +48,23 @@ namespace DrPet.Bll.Services
                 .SingleOrDefaultAsync();
         }
 
-        public async Task AddOrUpdateOwnerAsync(OwnerDTO owner)
+        public async Task AddOrUpdateOwnerAsync(OwnerDTO ownerDTO)
         {
             EntityEntry<Owner> entry;
 
             // update
-            if (owner.Id != 0)
-                entry = DbContext.Entry(await DbContext.Owners.FindAsync(owner.Id));
+            if (ownerDTO.Id != 0)
+            {
+                var owner = await DbContext.Owners.FindAsync(ownerDTO.Id);
+                owner.DateOfUpdate = DateTime.Now;
+                entry = DbContext.Entry(owner);
+            }
+
             // create
             else
-                entry = DbContext.Add(new Owner()); // empty entity
+                entry = DbContext.Add(new Owner { DateOfCreation = DateTime.Now });
 
-            entry.CurrentValues.SetValues(owner);
+            entry.CurrentValues.SetValues(ownerDTO);
 
             await DbContext.SaveChangesAsync();
         }
@@ -68,6 +73,6 @@ namespace DrPet.Bll.Services
         {
             DbContext.Owners.Remove(new Owner { Id = id });
             DbContext.SaveChanges();
-        }               
+        }
     }
 }

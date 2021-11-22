@@ -84,18 +84,23 @@ namespace DrPet.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdateConsultingAsync(ConsultingDTO consulting)
+        public async Task AddOrUpdateConsultingAsync(ConsultingDTO consultingDTO)
         {
             EntityEntry<Consulting> entry;
 
             // update
-            if (consulting.Id != 0)
-                entry = DbContext.Entry(await DbContext.Consultings.FindAsync(consulting.Id));
+            if (consultingDTO.Id != 0)
+            {
+                var consulting = await DbContext.Consultings.FindAsync(consultingDTO.Id);
+                consulting.DateOfUpdate = DateTime.Now;
+                entry = DbContext.Entry(consulting);
+            }    
+            
             // create
             else
-                entry = DbContext.Add(new Consulting()); // empty entity
+                entry = DbContext.Add(new Consulting { DateOfCreation = DateTime.Now });
 
-            entry.CurrentValues.SetValues(consulting);
+            entry.CurrentValues.SetValues(consultingDTO);            
 
             await DbContext.SaveChangesAsync();
         }
