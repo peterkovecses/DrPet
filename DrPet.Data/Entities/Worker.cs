@@ -11,6 +11,8 @@ namespace DrPet.Data.Entities
 
         public ICollection<Treatment>? Treatments { get; set; }
         public ICollection<Consulting>? Consultings { get; set; }
+        
+        public ICollection<AppUserWorker>? AppUserWorkers { get; set; }
 
         public override void Configure(EntityTypeBuilder<Worker> builder)
         {

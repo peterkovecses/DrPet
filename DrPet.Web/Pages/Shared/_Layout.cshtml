@@ -22,30 +22,35 @@
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarAdmin" role="button"
-                               data-toggle="dropdown" area-expanded="false">
-                                Adminisztráció
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarAdmin">
-                                <a class="dropdown-item" asp-page="/Admin/Doctors/Index">
-                                    Orvosok kezelése
-                                </a>
-                                <a class="dropdown-item" asp-page="/Admin/Consultings/Index">
-                                    Rendelési időpontok kezelése
-                                </a>
-                                <a class="dropdown-item" asp-page="/Admin/Owners/Index">
-                                    Gazdák kezelése
-                                </a>
-                                <a class="dropdown-item" asp-page="/Admin/Pets/Index">
-                                    Állatok kezelése
-                                </a>
-                                <a class="dropdown-item" asp-page="/Admin/Treatments/Index">
-                                    Kezelések
-                                </a>
-                            </div>
 
-                        </li>
+                        @if (User.IsInRole("Administrators"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarAdmin" role="button"
+                                   data-toggle="dropdown" area-expanded="false">
+                                    Adminisztráció
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarAdmin">
+                                    <a class="dropdown-item" asp-page="/Admin/Doctors/Index">
+                                        Orvosok kezelése
+                                    </a>
+                                    <a class="dropdown-item" asp-page="/Admin/Consultings/Index">
+                                        Rendelési időpontok kezelése
+                                    </a>
+                                    <a class="dropdown-item" asp-page="/Admin/Owners/Index">
+                                        Gazdák kezelése
+                                    </a>
+                                    <a class="dropdown-item" asp-page="/Admin/Pets/Index">
+                                        Állatok kezelése
+                                    </a>
+                                    <a class="dropdown-item" asp-page="/Admin/Treatments/Index">
+                                        Kezelések
+                                    </a>
+                                </div>
+                            </li>
+                        }
+
+
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Consultings/Consultings">Rendelések</a>
                         </li>
@@ -53,6 +58,8 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy/Privacy">Adatvédelem</a>
                         </li>
                     </ul>
+
+                    <partial name="_LoginPartial" />
                 </div>
             </div>
         </nav>

@@ -1,10 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DrPet.Data.Entities
 {
@@ -20,10 +14,10 @@ namespace DrPet.Data.Entities
             builder.HasIndex(po => new { po.PetId, po.OwnerId }).IsUnique();
 
             builder.HasOne(po => po.Owner).WithMany(o => o.PetOwnerships)
-                .HasForeignKey(t => t.OwnerId).HasPrincipalKey(o => o.Id);
+                .HasForeignKey(po => po.OwnerId).HasPrincipalKey(o => o.Id);
 
             builder.HasOne(po => po.Pet).WithMany(p => p.PetOwnerships)
-                .HasForeignKey(t => t.PetId).HasPrincipalKey(p => p.Id);                
+                .HasForeignKey(po => po.PetId).HasPrincipalKey(p => p.Id);                
         }
     }
 }
