@@ -50,24 +50,42 @@ namespace DrPet.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdateDoctorAsync(DoctorDTO doctor)
-        {
-            EntityEntry<Worker> entry;
-
+        public async Task AddOrUpdateDoctorAsync(DoctorDTO doctorDTO)
+        {            
             // update
-            if (doctor.Id != 0)
+            if (doctorDTO.Id != 0)
             {
-                var worker = await DbContext.Workers.FindAsync(doctor.Id);
+                EntityEntry<Worker> entry;
+                var worker = await DbContext.Workers.FindAsync(doctorDTO.Id);
                 worker.DateOfUpdate = DateTime.Now;
                 entry = DbContext.Entry(worker);
+                entry.CurrentValues.SetValues(doctorDTO);
             }
             
             // create
-            else                
-                entry = DbContext.Add(new Worker { DateOfCreation = DateTime.Now }); // empty entity
+            else
+            {
+                var worker = new Worker
+                {
+                    Name = doctorDTO.Name,
+                    PublicDescription = doctorDTO.PublicDescription,
+                    Position = doctorDTO.Position,
+                    DateOfCreation = DateTime.Now
+                };
 
-            entry.CurrentValues.SetValues(doctor);
+                worker.AppUserWorkers = new List<AppUserWorker>
+                {
+                    new AppUserWorker
+                    {
+                        AppUserId = doctorDTO.AppUserId,
+                        // The WorkerId properties value will be, the id what will be given to the Worker entity
+                        WorkerId = doctorDTO.Id
+                    }
+                };
 
+                DbContext.Add(worker);
+            }
+            
             await DbContext.SaveChangesAsync();{}
         }
     }

@@ -25,7 +25,9 @@ namespace DrPet.Web.Pages
 
         public async Task OnGetAsync()
         {
-            Doctors = await WorkerService.GetDoctorsAsync();
+            var doctors = await WorkerService.GetDoctorsAsync();
+            Doctors = doctors.OrderBy(d => d.Id).Take(4);
+
             Consultings = await ConsultingService.GetMonthlyConsultingsAsync(null);
             Consultings = Consultings.Take(10);
         }

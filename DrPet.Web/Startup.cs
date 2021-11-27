@@ -71,6 +71,7 @@ namespace DrPet.Web
             services.AddScoped<IOwnerService, OwnerService>();
             services.AddScoped<IPetService, PetService>();
             services.AddScoped<ITreatmentService, TreatmentService>();
+            services.AddScoped<IAppUserService, AppUserService>();
 
             services.AddRazorPages();
 
