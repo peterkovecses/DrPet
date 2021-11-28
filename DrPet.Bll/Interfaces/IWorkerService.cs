@@ -12,6 +12,6 @@ namespace DrPet.Bll.Interfaces
 
         public void DeleteWorker(int id);
 
-        public Task AddOrUpdateDoctorAsync(DoctorDTO doctor);
+        public Task AddOrUpdateDoctorAsync(DoctorDTO doctor, AppUserDTO? appUserDTO);
     }
 }

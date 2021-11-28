@@ -7,5 +7,6 @@ namespace DrPet.Bll.DTOs
         public string? Email { get; set; }
         // For the database query it is important to be nullable:
         public int? WorkerId { get; set; }
+        public int? RoleId { get; set; }
     }
 }

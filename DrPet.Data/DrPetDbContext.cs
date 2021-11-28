@@ -23,6 +23,7 @@ namespace DrPet.Data
         public DbSet<Medicine> Medicines { get; set; }
         public DbSet<Worker> Workers { get; set; }
         public DbSet<AppUser> AppUsers { get; set; }
+        public DbSet<AppUserWorker> AppUserWorkers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

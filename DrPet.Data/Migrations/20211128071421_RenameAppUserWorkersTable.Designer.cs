@@ -4,14 +4,16 @@ using DrPet.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DrPet.Data.Migrations
 {
     [DbContext(typeof(DrPetDbContext))]
-    partial class DrPetDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211128071421_RenameAppUserWorkersTable")]
+    partial class RenameAppUserWorkersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,44 +157,6 @@ namespace DrPet.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("Consultings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 11, 28, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(4866),
-                            StartOfConsulting = new DateTime(2021, 11, 28, 12, 13, 48, 385, DateTimeKind.Local).AddTicks(5288),
-                            WorkerId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 11, 29, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(6012),
-                            StartOfConsulting = new DateTime(2021, 11, 29, 12, 13, 48, 388, DateTimeKind.Local).AddTicks(5992),
-                            WorkerId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 11, 30, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(6022),
-                            StartOfConsulting = new DateTime(2021, 11, 30, 12, 13, 48, 388, DateTimeKind.Local).AddTicks(6018),
-                            WorkerId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 12, 1, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(6031),
-                            StartOfConsulting = new DateTime(2021, 12, 1, 12, 13, 48, 388, DateTimeKind.Local).AddTicks(6026),
-                            WorkerId = 4
-                        });
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.Medicine", b =>
@@ -223,16 +187,16 @@ namespace DrPet.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Probatbicol (350mg)"
                         },
                         new
                         {
                             Id = 2,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Placebotinol (50mg)"
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Placebotinol (10mg)"
                         });
                 });
 
@@ -266,26 +230,6 @@ namespace DrPet.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Owners");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Birthdate = new DateTime(1995, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Győr",
-                            Name = "Gazdi Dezső"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Birthdate = new DateTime(1995, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Location = "Győrújbarát",
-                            Name = "Béka Bandi"
-                        });
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.Pet", b =>
@@ -322,49 +266,6 @@ namespace DrPet.Data.Migrations
                     b.HasIndex("VarietyId");
 
                     b.ToTable("Pets");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Birthdate = new DateTime(2020, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Comment = "Versenydíjas (2019)",
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Blöki",
-                            Status = 0,
-                            VarietyId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Birthdate = new DateTime(2020, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Pimpedli",
-                            Status = 0,
-                            VarietyId = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Birthdate = new DateTime(2020, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Banán",
-                            Status = 0,
-                            VarietyId = 2
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Birthdate = new DateTime(2020, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Ms. Purry",
-                            Status = 0,
-                            VarietyId = 3
-                        });
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.PetOwnership", b =>
@@ -397,40 +298,6 @@ namespace DrPet.Data.Migrations
                         .IsUnique();
 
                     b.ToTable("PetOwnerships");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OwnerId = 1,
-                            PetId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OwnerId = 1,
-                            PetId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OwnerId = 2,
-                            PetId = 3
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            OwnerId = 2,
-                            PetId = 4
-                        });
                 });
 
             modelBuilder.Entity("DrPet.Data.Entities.Species", b =>
@@ -463,16 +330,16 @@ namespace DrPet.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LatinName = "Canis lupus familiaris",
                             Name = "Kutya"
                         },
                         new
                         {
                             Id = 2,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             LatinName = "Felis catus",
                             Name = "Macska"
                         });
@@ -579,40 +446,40 @@ namespace DrPet.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Rutinvizsgálat (panasz nélkül)",
                             Price = 10000.0
                         },
                         new
                         {
                             Id = 2,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Vizsgálat (akut panaszok)",
                             Price = 12000.0
                         },
                         new
                         {
                             Id = 3,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Kontrollvizsgálat",
                             Price = 8000.0
                         },
                         new
                         {
                             Id = 4,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Műtét",
                             Price = 30000.0
                         },
                         new
                         {
                             Id = 5,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Gyógyszer felírása",
                             Price = 2500.0
                         });
@@ -650,32 +517,32 @@ namespace DrPet.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Puli",
                             SpeciesId = 1
                         },
                         new
                         {
                             Id = 2,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Labrador",
                             SpeciesId = 1
                         },
                         new
                         {
                             Id = 3,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Amerikai rövidszőrű",
                             SpeciesId = 2
                         },
                         new
                         {
                             Id = 4,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfCreation = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            DateOfUpdate = new DateTime(2000, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Perzsa",
                             SpeciesId = 2
                         });
@@ -710,44 +577,6 @@ namespace DrPet.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Workers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Dr. Szabó ildikó",
-                            Position = 1,
-                            PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
-                        },
-                        new
-                        {
-                            Id = 2,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Dr. Horváth Tibor",
-                            Position = 1,
-                            PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
-                        },
-                        new
-                        {
-                            Id = 3,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Dr. Kiss Erika",
-                            Position = 1,
-                            PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
-                        },
-                        new
-                        {
-                            Id = 4,
-                            DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Dr. Kovács József",
-                            Position = 1,
-                            PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>

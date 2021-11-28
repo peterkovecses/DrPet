@@ -21,7 +21,7 @@ namespace DrPet.Data.Seed.Services
                 await _roleManager.CreateAsync(new IdentityRole<int> { Name = "Administrators" });
 
             if (!await _roleManager.RoleExistsAsync("Doctors"))
-                await _roleManager.CreateAsync(new IdentityRole<int> { Name = "Doctors" });
+                await _roleManager.CreateAsync(new IdentityRole<int> { Name = "Doctors" });            
         }
     }
 }

@@ -30,10 +30,10 @@ namespace DrPet.Web
 
                 // create the admin user
                 var userSeeder = scope.ServiceProvider.GetRequiredService<IUserSeedService>();
-                await userSeeder.SeedUserAsync();
+                await userSeeder.SeedUserAsync();                
             }
             host.Run();
-        }
+    }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)

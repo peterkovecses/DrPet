@@ -50,7 +50,7 @@ namespace DrPet.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdateDoctorAsync(DoctorDTO doctorDTO)
+        public async Task AddOrUpdateDoctorAsync(DoctorDTO doctorDTO, AppUserDTO? appUserDTO)
         {            
             // update
             if (doctorDTO.Id != 0)
@@ -65,6 +65,7 @@ namespace DrPet.Bll.Services
             // create
             else
             {
+                
                 var worker = new Worker
                 {
                     Name = doctorDTO.Name,
@@ -78,7 +79,7 @@ namespace DrPet.Bll.Services
                     new AppUserWorker
                     {
                         AppUserId = doctorDTO.AppUserId,
-                        // The WorkerId properties value will be, the id what will be given to the Worker entity
+                        // The WorkerId properties value will be the id what will be given to the Worker entity
                         WorkerId = doctorDTO.Id
                     }
                 };
