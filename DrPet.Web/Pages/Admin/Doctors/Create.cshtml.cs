@@ -32,8 +32,7 @@ namespace DrPet.Web.Pages.Admin.Doctors
             if (!ModelState.IsValid)
                 return Page();
 
-            var appUserDTO = await AppUserService.GetAppUserAsync(Doctor.Email);
-            // appUserDTO.RoleId = 
+            var appUserDTO = await AppUserService.GetAppUserAsync(Doctor.Email);                
 
             // User must be registered first
             if (appUserDTO == null)
@@ -51,7 +50,7 @@ namespace DrPet.Web.Pages.Admin.Doctors
 
             Doctor.AppUserId = appUserDTO.Id;
 
-            await WorkerService.AddOrUpdateDoctorAsync(Doctor, appUserDTO);
+            await WorkerService.AddOrUpdateDoctorAsync(Doctor);
 
             return RedirectToPage("./Index");
         }

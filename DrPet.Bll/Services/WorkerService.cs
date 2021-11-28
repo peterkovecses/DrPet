@@ -10,14 +10,20 @@ using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.AspNetCore.Identity;
 
 namespace DrPet.Bll.Services
 {
     public class WorkerService : IWorkerService
     {
         public DrPetDbContext DbContext { get; }
+        public UserManager<AppUser> UserManager { get; }
 
-        public WorkerService(DrPetDbContext dbContext) => DbContext = dbContext;        
+        public WorkerService(DrPetDbContext dbContext, UserManager<AppUser> userManager)
+        {
+            DbContext = dbContext;
+            UserManager = userManager;
+        }
 
         private Expression<Func<Worker, DoctorDTO>> DoctorSelector = d => new DoctorDTO
         {
@@ -50,7 +56,7 @@ namespace DrPet.Bll.Services
             DbContext.SaveChanges();
         }
 
-        public async Task AddOrUpdateDoctorAsync(DoctorDTO doctorDTO, AppUserDTO? appUserDTO)
+        public async Task AddOrUpdateDoctorAsync(DoctorDTO doctorDTO)
         {            
             // update
             if (doctorDTO.Id != 0)
@@ -85,6 +91,12 @@ namespace DrPet.Bll.Services
                 };
 
                 DbContext.Add(worker);
+
+                var appUser = await DbContext.AppUsers
+                .Where(au => au.Email == doctorDTO.Email)
+                .SingleAsync();
+
+                await UserManager.AddToRoleAsync(appUser, "Doctors");
             }
             
             await DbContext.SaveChangesAsync();{}

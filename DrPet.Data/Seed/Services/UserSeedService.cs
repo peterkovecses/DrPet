@@ -23,8 +23,11 @@ namespace DrPet.Data.Seed.Services
 
         public async Task SeedUserAsync()
         {
-            // Add doctor AppUsers
-            var doctorUsers = new List<AppUser>
+            // if there is no user with this role
+            if (!(await _userManager.GetUsersInRoleAsync("Doctors")).Any())
+            {
+                // Add doctor AppUsers
+                var doctorUsers = new List<AppUser>
             {
                 new AppUser { UserName = "drszaboildiko@gmail.com", Email =  "drszaboildiko@gmail.com", Name = "Dr. Szabó ildikó", SecurityStamp = Guid.NewGuid().ToString()},
                 new AppUser { UserName = "drhorvathtibor@gmail.com", Email =  "drhorvathtibor@gmail.com", Name = "Dr. Horváth Tibor", SecurityStamp = Guid.NewGuid().ToString()},
@@ -32,28 +35,29 @@ namespace DrPet.Data.Seed.Services
                 new AppUser { UserName = "drkovacsjozsef@gmail.com", Email =  "drkovacsjozsef@gmail.com", Name = "Dr. Kovács József", SecurityStamp = Guid.NewGuid().ToString()}
             };
 
-            foreach (var doctorUser in doctorUsers)
-            {
-                var createResult = await _userManager.CreateAsync(doctorUser, _adminSettings.Password);
-
-                // if the registration needs to be confirmed
-                if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                foreach (var doctorUser in doctorUsers)
                 {
-                    // confirm the registration
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(doctorUser);
-                    var result = await _userManager.ConfirmEmailAsync(doctorUser, code);
-                }
+                    var createResult = await _userManager.CreateAsync(doctorUser, _adminSettings.Password);
 
-                // set the user's permissions
-                var addToRoleResult = await _userManager.AddToRoleAsync(doctorUser, "Doctors");
+                    // if the registration needs to be confirmed
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
+                    {
+                        // confirm the registration
+                        var code = await _userManager.GenerateEmailConfirmationTokenAsync(doctorUser);
+                        var result = await _userManager.ConfirmEmailAsync(doctorUser, code);
+                    }
 
-                if (!createResult.Succeeded || !addToRoleResult.Succeeded)
-                {
-                    throw new ApplicationException("Nem sikerült létrehozni az orvos felhasználót: " +
-                        string.Join(", ", createResult.Errors.Concat(addToRoleResult.Errors).Select(e => e.Description)));
+                    // set the user's permissions
+                    var addToRoleResult = await _userManager.AddToRoleAsync(doctorUser, "Doctors");
+
+                    if (!createResult.Succeeded || !addToRoleResult.Succeeded)
+                    {
+                        throw new ApplicationException("Nem sikerült létrehozni az orvos felhasználót: " +
+                            string.Join(", ", createResult.Errors.Concat(addToRoleResult.Errors).Select(e => e.Description)));
+                    }
                 }
             }
-
+                
             // if there is no user with this role
             if (!(await _userManager.GetUsersInRoleAsync("Administrators")).Any())
             {

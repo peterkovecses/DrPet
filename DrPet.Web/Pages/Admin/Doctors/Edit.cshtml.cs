@@ -36,7 +36,7 @@ namespace DrPet.Web.Pages.Admin.Doctors
             if (!ModelState.IsValid)
                 return Page();
 
-            await WorkerService.AddOrUpdateDoctorAsync(Doctor, null);
+            await WorkerService.AddOrUpdateDoctorAsync(Doctor);
 
             return RedirectToPage("./Index");
         }
