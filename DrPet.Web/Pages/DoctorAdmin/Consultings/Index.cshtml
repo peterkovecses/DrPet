@@ -1,0 +1,76 @@
+﻿@page
+@model DrPet.Web.Pages.DoctorAdmin.Consultings.IndexModel
+
+<div class="d-flex justify-content-between align-items-center mb-2">
+    <h1>Rendelési időpontok</h1>
+    <span id="spinner" style="display: none;"><i class="fas fa-spinner fa-spin"></i></span>
+    <a asp-page="./Create" class="btn btn-outline-primary">
+        <i class="fas fa-plus"></i>&nbsp;Rendelési időpont rögzítése
+    </a>
+</div>
+
+<table class="table" id="doctorsConsultingsTable">
+    <thead>
+        <tr>
+            <th class="col-md-4">
+                @Html.DisplayNameFor(model => model.Consultings[0].StartOfConsulting)
+            </th>
+
+            <th class="col-md-4">
+                @Html.DisplayNameFor(model => model.Consultings[0].EndOfConsulting)
+            </th>
+
+            <th class="col-md-4">
+                @Html.DisplayNameFor(model => model.Consultings[0].WorkerName)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Consultings)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StartOfConsulting)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.EndOfConsulting)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.WorkerName)
+                </td>
+
+                <td class="d-flex">
+                    <a asp-page="./Edit" asp-route-id="@item.Id" class="btn btn-sm text-primary" title="Szerkesztés">
+                        <i class="far fa-edit"></i>
+                    </a>
+
+                    <form method="post"
+                          data-ajax="true"
+                          data-ajax-method="post"
+                          data-ajax-confirm="Biztosan törölni szeretné a rendelési időpontot?"
+                          data-ajax-loading="#spinner"
+                          data-ajax-success="refreshPage">
+                        <input type="hidden" name="id" value="@item.Id">
+                        <button type="submit" class="btn btn-sm text-danger" title="Törlés">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#doctorsConsultingsTable').dataTable();
+        });
+    </script>
+
+    <script src="/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
+}
+

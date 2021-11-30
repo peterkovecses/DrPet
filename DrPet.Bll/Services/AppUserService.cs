@@ -2,6 +2,7 @@
 using DrPet.Bll.Interfaces;
 using DrPet.Data;
 using DrPet.Data.Entities;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DrPet.Bll.Services
     {
         public DrPetDbContext DbContext { get; }
 
-        public AppUserService(DrPetDbContext dbContext)
+        public AppUserService(DrPetDbContext dbContext, UserManager<AppUser> userManager)
         {
             DbContext = dbContext;
         }

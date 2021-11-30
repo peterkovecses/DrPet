@@ -50,6 +50,13 @@
                             </li>
                         }
 
+                        @if (User.IsInRole("Doctors"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/DoctorAdmin/Index">Saját orvosi felület</a>
+                            </li>
+                        }
+
 
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Consultings/Consultings">Rendelések</a>

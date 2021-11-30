@@ -1,0 +1,35 @@
+﻿@{
+    if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
+    {
+        Layout = (string)parentLayout;
+    }
+    else
+    {
+        Layout = "/Pages/Shared/_Layout.cshtml";
+    }
+}
+
+<div>
+    <div class="row" style="height: 82vh;">
+        <div class="col-md-2" style="background-color: #F6F6F8;">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-page="/DoctorAdmin/Index">Kezdőoldal</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-page="/DoctorAdmin/Consultings/Index">Rendelések</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" asp-page="/DoctorAdmin/Doctor/Index">Orvos adatok</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @RenderSection("Scripts", required: false)
+}

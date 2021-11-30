@@ -5,6 +5,6 @@ namespace DrPet.Bll.Interfaces
 {
     public interface IAppUserService
     {
-        public Task<AppUserDTO> GetAppUserAsync(string email);       
+        public Task<AppUserDTO> GetAppUserAsync(string email);        
     }
 }

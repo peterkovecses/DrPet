@@ -1,0 +1,41 @@
+﻿@page
+@model DrPet.Web.Pages.DoctorAdmin.Consultings.EditModel
+
+<h1>Rendelési időpont szerkesztése</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Consulting.Id" />
+            <input type="hidden" asp-for="Consulting.WorkerId" />
+
+            <div class="form-group">
+                <label asp-for="Consulting.StartOfConsulting" class="control-label"></label>
+                <input asp-for="Consulting.StartOfConsulting" max="9999-02-20T20:20" class="form-control" />
+                <span asp-validation-for="Consulting.StartOfConsulting" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Consulting.EndOfConsulting" class="control-label"></label>
+                <input asp-for="Consulting.EndOfConsulting" max="9999-02-20T20:20" class="form-control" />
+                <span asp-validation-for="Consulting.EndOfConsulting" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Módosít" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Vissza a rendelési időpontok listájához </a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -29,8 +29,14 @@ namespace DrPet.Web.Pages.Admin.Doctors
 
         public async Task<IActionResult> OnPostAsync()
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) 
                 return Page();
+
+            if (Doctor.Email == null)
+            {
+                UnsuccessMessage = "E-mail cím megadása kötelezõ.";
+                return Page();
+            }
 
             var appUserDTO = await AppUserService.GetAppUserAsync(Doctor.Email);                
 

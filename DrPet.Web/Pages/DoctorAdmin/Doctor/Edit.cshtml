@@ -1,0 +1,40 @@
+﻿@page
+@model DrPet.Web.Pages.DoctorAdmin.Doctor.EditModel
+
+<h1>Orvos adatok szerkesztése</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-8">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Doctor.Id" />
+
+            <div class="form-group col-md-5 p-0">
+                <label asp-for="Doctor.Name" class="control-label"></label>
+                <input asp-for="Doctor.Name" class="form-control" />
+                <span asp-validation-for="Doctor.Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Doctor.PublicDescription" class="control-label"></label>
+                <textarea asp-for="Doctor.PublicDescription" class="form-control" rows="8"></textarea>
+                <span asp-validation-for="Doctor.PublicDescription" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-2">
+                <input type="submit" value="Mentés" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Vissza az adatlapra</a>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

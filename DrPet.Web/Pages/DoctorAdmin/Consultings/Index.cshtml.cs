@@ -5,23 +5,31 @@ using DrPet.Bll.Interfaces;
 using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Identity;
+using DrPet.Data.Entities;
 
-namespace DrPet.Web.Pages.Admin.Consultings
+namespace DrPet.Web.Pages.DoctorAdmin.Consultings
 {
-    public class DetailsModel : PageModel
+    public class IndexModel : PageModel
     {
+        private readonly UserManager<AppUser> _userManager;
         public IConsultingService ConsultingService { get; }
-
-        public DetailsModel(IConsultingService consultingService)
+        public IWorkerService WorkerService { get; }
+        public IndexModel(IConsultingService consultingService, UserManager<AppUser> userManager, IWorkerService workerService)
         {
             ConsultingService = consultingService;
+            _userManager = userManager;
+            WorkerService = workerService;
         }
 
         public IList<ConsultingDTO> Consultings { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync()
         {
-            if (id == null)
+            var user = await _userManager.GetUserAsync(User);
+            int id = await WorkerService.GetDoctorIdByAppUserIdAsync(user.Id);
+
+            if (id == 0)
                 return NotFound();
 
             Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null, id);

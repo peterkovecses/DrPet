@@ -35,7 +35,11 @@ namespace DrPet.Bll.Services
         public async Task<IList<DoctorDTO>> GetDoctorsAsync()
         {
             return (await DbContext.Workers.Where(w => w.Position == Position.Doctor)
-                .Select(d => new DoctorDTO { Id = d.Id, Name = d.Name, PublicDescription = d.PublicDescription,
+                .Select(d => new DoctorDTO
+                {
+                    Id = d.Id,
+                    Name = d.Name,
+                    PublicDescription = d.PublicDescription,
                     ShortPublicDescription = d.PublicDescription.Shorten(200) // Helpers\StringHelper.cs
                 })
                 .ToListAsync())
@@ -50,6 +54,7 @@ namespace DrPet.Bll.Services
                 .Select(DoctorSelector)
                 .SingleOrDefaultAsync();
         }
+
         public void DeleteWorker(int id)
         {
             DbContext.Workers.Remove(new Worker { Id = id });
@@ -57,7 +62,7 @@ namespace DrPet.Bll.Services
         }
 
         public async Task AddOrUpdateDoctorAsync(DoctorDTO doctorDTO)
-        {            
+        {
             // update
             if (doctorDTO.Id != 0)
             {
@@ -67,11 +72,11 @@ namespace DrPet.Bll.Services
                 entry = DbContext.Entry(worker);
                 entry.CurrentValues.SetValues(doctorDTO);
             }
-            
+
             // create
             else
             {
-                
+
                 var worker = new Worker
                 {
                     Name = doctorDTO.Name,
@@ -98,8 +103,14 @@ namespace DrPet.Bll.Services
 
                 await UserManager.AddToRoleAsync(appUser, "Doctors");
             }
-            
-            await DbContext.SaveChangesAsync();{}
+
+            await DbContext.SaveChangesAsync();
+            { }
+        }
+
+        public async Task<int> GetDoctorIdByAppUserIdAsync(int id)
+        {
+            return await DbContext.AppUserWorkers.Where(auw => auw.AppUserId == id).Select(auw => auw.WorkerId).SingleAsync();
         }
     }
 }
