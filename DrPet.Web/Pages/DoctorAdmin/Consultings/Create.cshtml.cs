@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DrPet.Data.Entities;
 using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace DrPet.Web.Pages.DoctorAdmin.Consultings
 {
@@ -29,7 +30,10 @@ namespace DrPet.Web.Pages.DoctorAdmin.Consultings
 
         public async Task OnGetAsync()
         {
-            var success = int.TryParse(_userManager.GetUserId(User), out var userId);
+            // var success = int.TryParse(_userManager.GetUserId(User), out var userId);
+
+            var success = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId);
+            
             if (success)
                 DoctorId = await WorkerService.GetDoctorIdByAppUserIdAsync(userId);
         }

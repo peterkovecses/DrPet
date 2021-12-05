@@ -27,7 +27,9 @@ namespace DrPet.Web.Pages.DoctorAdmin.Consultings
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var success = int.TryParse(_userManager.GetUserId(User), out var userId);
+            // var success = int.TryParse(_userManager.GetUserId(User), out var userId);
+
+            var success = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId);
 
             if (!success)
                 return NotFound();
