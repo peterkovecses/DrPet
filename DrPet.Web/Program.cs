@@ -30,7 +30,10 @@ namespace DrPet.Web
 
                 // create the admin user
                 var userSeeder = scope.ServiceProvider.GetRequiredService<IUserSeedService>();
-                await userSeeder.SeedUserAsync();                
+                await userSeeder.SeedUserAsync();
+
+                var appUserWorkerSeeder = scope.ServiceProvider.GetRequiredService<IAppUserWorkerSeedService>();
+                await appUserWorkerSeeder.SeedAppUserWorkerAsync();
             }
             host.Run();
     }
