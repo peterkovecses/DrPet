@@ -11,12 +11,10 @@ namespace DrPet.Web.Pages.DoctorAdmin.Doctor
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
         public IWorkerService WorkerService { get; }
 
-        public IndexModel(UserManager<AppUser> userManager, IWorkerService workerService)
+        public IndexModel(IWorkerService workerService)
         {
-            _userManager = userManager;
             WorkerService = workerService;
         }
 
@@ -30,12 +28,7 @@ namespace DrPet.Web.Pages.DoctorAdmin.Doctor
             if (!success)
                 return NotFound();
 
-            var id = await WorkerService.GetDoctorIdByAppUserIdAsync(userId);
-
-            if (id == 0)
-                return NotFound();
-
-            Doctor = await WorkerService.GetDoctorAsync(id);
+            Doctor = await WorkerService.GetDoctorByAppUserIdAsync(userId);
 
             if (Doctor == null)
                 return NotFound();

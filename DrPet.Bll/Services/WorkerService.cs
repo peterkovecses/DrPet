@@ -112,5 +112,10 @@ namespace DrPet.Bll.Services
         {
             return await DbContext.AppUserWorkers.Where(auw => auw.AppUserId == id).Select(auw => auw.WorkerId).SingleAsync();
         }
+
+        public async Task<DoctorDTO> GetDoctorByAppUserIdAsync(int id)
+        {
+            return await DbContext.Workers.Include(w => w.AppUserWorkers).Where(w => w.AppUserWorkers.FirstOrDefault().AppUserId == id).Select(DoctorSelector).SingleAsync();
+        }
     }
 }

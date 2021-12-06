@@ -15,5 +15,7 @@ namespace DrPet.Bll.Interfaces
         public Task AddOrUpdateDoctorAsync(DoctorDTO doctor);
 
         public Task<int> GetDoctorIdByAppUserIdAsync(int id);
+
+        public Task<DoctorDTO> GetDoctorByAppUserIdAsync(int id);
     }
 }

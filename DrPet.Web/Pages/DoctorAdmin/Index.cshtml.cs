@@ -2,26 +2,35 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Identity;
-using DrPet.Data.Entities;
+using DrPet.Bll.Interfaces;
+using System.Security.Claims;
 
 namespace DrPet.Web.Pages.DoctorAdmin
 {
     public class IndexModel : PageModel
     {
-        private readonly UserManager<AppUser> _userManager;
-
-        public IndexModel(UserManager<AppUser> userManager)
+        public IWorkerService WorkerService { get; }
+        public IndexModel(IWorkerService workerService)
         {
-            _userManager = userManager;
+            WorkerService = workerService;
         }
 
         public string Name { get; set; }
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var user = await _userManager.GetUserAsync(User);
+            var success = int.TryParse(User.FindFirstValue(ClaimTypes.NameIdentifier), out var userId);
 
-            Name = user.Name;            
+            if (!success)
+                return NotFound();
+
+            var doctor = await WorkerService.GetDoctorByAppUserIdAsync(userId);
+
+            if (doctor == null)
+                return NotFound();
+
+            Name = doctor.Name;
+
             return Page();
         }
     }
