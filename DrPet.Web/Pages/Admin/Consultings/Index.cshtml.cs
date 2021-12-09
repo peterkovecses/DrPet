@@ -22,7 +22,7 @@ namespace DrPet.Web.Pages.Admin.Consultings
 
         public async Task OnGetAsync()
         {
-            Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null);
+            Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null, null, null);
         }
 
         public IActionResult OnPost(int id)

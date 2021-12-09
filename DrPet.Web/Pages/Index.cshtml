@@ -82,16 +82,8 @@
                             <div class="container">
                                 <div class="row">
 
-                                    <div class="col-md-4">
-                                        <img class="d-block w-100 mt-3 mb-3" src="~/img/@(doctor.Id).jpg" alt="@(doctor.Name)">
-                                    </div>
+                                    <vc:doctor-card doctor-id="@doctor.Id" doctor-name="@doctor.Name" photo-name="@doctor.Id" public-description="@doctor.PublicDescription"></vc:doctor-card>
 
-                                    <div class="col-md-8">
-                                        <div class="mt-4">
-                                            <h5><a class="text-decoration-none text-dark" asp-area="" asp-page="/Consultings/Doctorsconsultings" asp-route-id="@(doctor.Id)">@(doctor.Name)</a></h5>
-                                            <p>@(doctor.PublicDescription)</p>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -110,28 +102,8 @@
             </a>
         </div>
     </div>
-
-    <h3 class="mt-3 mb-3">Rendelési időpontok</h3>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th scope="col">Rendelés kezdete</th>
-                <th scope="col">Rendelés vége</th>
-                <th scope="col">Orvos</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var item in Model.Consultings)
-            {
-                <tr>
-                    <td>@item.StartOfConsulting</td>
-                    <td>@item.EndOfConsulting</td>
-                    <td>@item.WorkerName</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    
+    <vc:consultings display-type="@Enums.DisplayType.ActualWeak" from="@null" till="@null" date="@null" doctor-id="@null" piece="@null"></vc:consultings>
 
 </main>
 

@@ -24,7 +24,7 @@ namespace DrPet.Web.Pages.Admin.Consultings
             if (id == null)
                 return NotFound();
 
-            Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null, id);
+            Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null, id, null);
 
             return Page();
         }

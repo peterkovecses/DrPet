@@ -9,6 +9,7 @@ using DrPet.Bll.DTOs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using System.Linq.Expressions;
+using DrPet.Bll.Helpers;
 
 namespace DrPet.Bll.Services
 {
@@ -27,7 +28,7 @@ namespace DrPet.Bll.Services
             WorkerName = c.Worker.Name
         };
 
-        public async Task<IList<ConsultingDTO>> GetConsultingsAsync(DateTime from, DateTime? till, int? workerId = null, int? piece = null)
+        public async Task<IList<ConsultingDTO>> GetConsultingsAsync(DateTime from, DateTime? till, int? workerId, int? piece)
         {
             var consultings = DbContext.Consultings.Where(c => c.StartOfConsulting >= from);
 
@@ -47,7 +48,7 @@ namespace DrPet.Bll.Services
                 .ToListAsync();
         }        
 
-        public async Task<IList<ConsultingDTO>> GetMonthlyConsultingsAsync(string? date)
+        public async Task<IList<ConsultingDTO>> GetMonthlyConsultingsAsync(DateTime? date, int? workerId, int? piece)
         {
             DateTime from;
             DateTime till;
@@ -58,11 +59,18 @@ namespace DrPet.Bll.Services
             }
             else
             {
-                from = DateTime.Parse(date);
+                from = (DateTime)date;
                 from = new DateTime(from.Year, from.Month, 1);
                 till = from.AddMonths(1);
             }            
-            return await GetConsultingsAsync(from, till);
+            return await GetConsultingsAsync(from, till, workerId, piece);
+        }
+
+        public async Task<IList<ConsultingDTO>> GetActualWeekConsultingsAsync(int? doctorId, int? piece)
+        {
+            var from = DateTime.Now.FirstDayOfWeek(DayOfWeek.Monday);
+            var till = from.AddDays(7);
+            return await GetConsultingsAsync(from, till, doctorId, piece);
         }
 
         public async Task<ConsultingDTO> GetConsultingAsync(DateTime date, int workerId)

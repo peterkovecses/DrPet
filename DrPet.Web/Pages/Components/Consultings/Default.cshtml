@@ -1,0 +1,61 @@
+﻿@model DrPet.Web.ViewComponents.ConsultingsViewComponent.DisplayConsultings
+
+@{
+    if (Model.DisplayType == Enums.DisplayType.ActualWeak)
+    {
+        <h3 class="mt-3 mb-3">Rendelési időpontok</h3>
+    }
+
+    else if (Model.DisplayType == Enums.DisplayType.Monthly)
+    {
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <h1>Rendelési időpontok @Model.ActualMonth</h1>
+
+            <div>
+                <a class="btn btn-outline-primary" asp-route-date="@(Model.ActualDate.AddMonths(-1))">Előző hónap</a>
+                <a class="btn btn-outline-primary" asp-route-date="@(Model.ActualDate.AddMonths(1))">Következő hónap</a>
+            </div>
+
+        </div>
+    }
+
+    else if (Model.DisplayType == Enums.DisplayType.Doctor)
+    {
+        @if (Model.Consultings.Count() > 0)
+        {
+            <h2 class="mb-4">@Model.Consultings.ElementAt(0).WorkerName rendelési időpontjai</h2>
+        }
+        else
+        {
+            <h2>Nem található rendelés</h2>
+        }
+    }
+}
+
+<table class="table" id="consultingTable">
+    <thead>
+        <tr>
+            <th scope="col">Rendelés kezdete</th>
+            <th scope="col">Rendelés vége</th>
+            <th scope="col">Orvos</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Consultings)
+        {
+            <tr>
+                <td>@item.StartOfConsulting</td>
+                <td>@item.EndOfConsulting</td>
+                <td>@item.WorkerName</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#consultingTable').dataTable();
+        });
+    </script>
+}

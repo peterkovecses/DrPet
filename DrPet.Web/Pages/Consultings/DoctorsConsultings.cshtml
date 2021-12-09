@@ -1,32 +1,4 @@
 ﻿@page
 @model DrPet.Web.Pages.Consultings.DoctorsConsultingsModel
-@{
-}
 
-@if (Model.Consultings.Count() > 0)
-{
-    <h2 class="mb-4">@Model.Consultings.ElementAt(0).WorkerName rendelési időpontjai</h2>
-}
-else
-{
-    <h2>Nem található a keresett orvos</h2>
-}
-
-
-<table class="table table-striped">
-    <thead>
-        <tr>
-            <th scope="col">Rendelés kezdete</th>
-            <th scope="col">Rendelés vége</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Consultings)
-        {
-            <tr>
-                <td>@item.StartOfConsulting</td>
-                <td>@item.EndOfConsulting</td>
-            </tr>
-        }
-    </tbody>
-</table>
+<vc:consultings display-type="@Enums.DisplayType.Doctor" from="@DateTime.Now" till="@null" date="@null" doctor-id="@Model.DoctorId" piece="@null"></vc:consultings>

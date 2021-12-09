@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-using System;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,7 +14,7 @@ namespace DrPet.Web.Pages
         public IndexModel(IWorkerService workerService, IConsultingService consultingService)
         {
             WorkerService = workerService;
-            ConsultingService = consultingService;
+            ConsultingService = consultingService;            
         }        
 
         public IEnumerable<DoctorDTO> Doctors { get; private set; }
@@ -27,9 +24,6 @@ namespace DrPet.Web.Pages
         {
             var doctors = await WorkerService.GetDoctorsAsync();
             Doctors = doctors.OrderBy(d => d.Id).Take(4);
-
-            Consultings = await ConsultingService.GetMonthlyConsultingsAsync(null);
-            Consultings = Consultings.Take(10);
         }
     }
 }

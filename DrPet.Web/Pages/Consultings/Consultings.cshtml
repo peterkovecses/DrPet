@@ -1,40 +1,4 @@
 ﻿@page
 @model DrPet.Web.Pages.ConsultingsModel
 
-<div class="d-flex justify-content-between align-items-center mb-2">
-    <h1>Rendelési időpontok @Model.ActualMonth</h1>
-
-    <div>
-        <a class="btn btn-outline-primary" asp-route-date="@(Model.ActualDate.AddMonths(-1))">Előző hónap</a>
-        <a class="btn btn-outline-primary" asp-route-date="@(Model.ActualDate.AddMonths(1))">Következő hónap</a>
-    </div>
-
-</div>
-
-<table class="table" id="consultingTable">
-    <thead>
-        <tr>
-            <th scope="col">Rendelés kezdete</th>
-            <th scope="col">Rendelés vége</th>
-            <th scope="col">Orvos</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Consultings)
-        {
-            <tr>
-                <td>@item.StartOfConsulting</td>
-                <td>@item.EndOfConsulting</td>
-                <td>@item.WorkerName</td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-@section Scripts {
-    <script>
-        $(document).ready(function () {
-            $('#consultingTable').dataTable();
-        });
-    </script>
-}
+<vc:consultings display-type="@Enums.DisplayType.Monthly" from="@null" till="@null" date="@Model.ActualDate" doctor-id="@null" piece="@null"></vc:consultings>

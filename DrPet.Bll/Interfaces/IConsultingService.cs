@@ -7,9 +7,11 @@ namespace DrPet.Bll.Interfaces
 {
     public interface IConsultingService
     {
-        public Task<IList<ConsultingDTO>> GetConsultingsAsync(DateTime from, DateTime? till, int? workerId = null, int? piece = null);
+        public Task<IList<ConsultingDTO>> GetConsultingsAsync(DateTime from, DateTime? till, int? workerId, int? piece);
 
-        public Task<IList<ConsultingDTO>> GetMonthlyConsultingsAsync(string? date);
+        public Task<IList<ConsultingDTO>> GetMonthlyConsultingsAsync(DateTime? date, int? workerId, int? piece);
+
+        public Task<IList<ConsultingDTO>> GetActualWeekConsultingsAsync(int? doctorId, int? piece);
 
         public Task<ConsultingDTO> GetConsultingAsync(DateTime date, int workerId);
 
