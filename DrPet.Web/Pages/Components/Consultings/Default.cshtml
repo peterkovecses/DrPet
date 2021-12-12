@@ -23,34 +23,43 @@
     {
         @if (Model.Consultings.Count() > 0)
         {
-            <h2 class="mb-4">@Model.Consultings.ElementAt(0).WorkerName rendelési időpontjai</h2>
+
+            <h2 class="mb-4 col-md-8">@Model.Consultings.ElementAt(0).WorkerName rendelési időpontjai</h2>
         }
         else
         {
-            <h2>Nem található rendelés</h2>
+            <h2>A kiválasztott orvosnak pillanatnyilag nincs rendelési időpontja</h2>
         }
     }
 }
 
-<table class="table" id="consultingTable">
-    <thead>
-        <tr>
-            <th scope="col">Rendelés kezdete</th>
-            <th scope="col">Rendelés vége</th>
-            <th scope="col">Orvos</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Consultings)
-        {
+<div class="row">
+    <table class="table col-md-10" id="consultingTable">
+        <thead>
             <tr>
-                <td>@item.StartOfConsulting</td>
-                <td>@item.EndOfConsulting</td>
-                <td>@item.WorkerName</td>
+                <th scope="col">Rendelés kezdete</th>
+                <th scope="col">Rendelés vége</th>
+                <th scope="col">Orvos</th>
             </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Consultings)
+            {
+                <tr style="@(item.EndOfConsulting < DateTime.Now ? "color: gray;" : "")">
+                    <td>@item.StartOfConsulting</td>
+                    <td>@item.EndOfConsulting</td>
+                    <td>@item.WorkerName</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="col-md-2">
+        @if (Model.PhotoPath != null)
+        {
+            <img style="max-height: 300px;" src="@($"/{Model.PhotoPath}")" alt="@Model.Consultings.ElementAt(0).WorkerName">
         }
-    </tbody>
-</table>
+    </div>
+</div>
 
 @section Scripts {
     <script>

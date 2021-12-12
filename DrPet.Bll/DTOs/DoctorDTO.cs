@@ -1,4 +1,5 @@
 ﻿using DrPet.Data;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
 namespace DrPet.Bll.DTOs
@@ -24,5 +25,10 @@ namespace DrPet.Bll.DTOs
         public int AppUserId { get; set; }
 
         public Position Position { get; set; } = Position.Doctor;
+        
+        [Display(Name = "Fotó")]
+        public IFormFile? Photo { get; set; }
+
+        public string? PhotoPath { get; set; }
     }    
 }

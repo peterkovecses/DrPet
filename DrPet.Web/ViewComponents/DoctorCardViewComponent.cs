@@ -15,17 +15,17 @@ namespace DrPet.Web.ViewComponents
         {
             public int DoctorId { get; set; }
             public string DoctorName { get; set; }
-            public string PhotoName { get; set; }
+            public string PhotoPath { get; set; }
             public string PublicDescription { get; set; }
         }
 
-        public IViewComponentResult Invoke(int doctorId, string doctorName, string photoName, string publicDescription)
+        public IViewComponentResult Invoke(int doctorId, string doctorName, string photoPath, string publicDescription)
         {
             var doctorCard = new DoctorCard
             {
                 DoctorId = doctorId,
                 DoctorName = doctorName,
-                PhotoName = photoName,
+                PhotoPath = photoPath,
                 PublicDescription = publicDescription
             };
 

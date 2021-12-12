@@ -29,7 +29,8 @@ namespace DrPet.Bll.Services
         {
             Id = d.Id,
             Name = d.Name,
-            PublicDescription = d.PublicDescription
+            PublicDescription = d.PublicDescription,
+            PhotoPath = d.PhotoPath
         };
 
         public async Task<IList<DoctorDTO>> GetDoctorsAsync()
@@ -39,6 +40,7 @@ namespace DrPet.Bll.Services
                 {
                     Id = d.Id,
                     Name = d.Name,
+                    PhotoPath = d.PhotoPath,
                     PublicDescription = d.PublicDescription,
                     ShortPublicDescription = d.PublicDescription.Shorten(200) // Helpers\StringHelper.cs
                 })
@@ -82,6 +84,7 @@ namespace DrPet.Bll.Services
                     Name = doctorDTO.Name,
                     PublicDescription = doctorDTO.PublicDescription,
                     Position = doctorDTO.Position,
+                    PhotoPath = doctorDTO.PhotoPath,
                     DateOfCreation = DateTime.Now
                 };
 
@@ -116,6 +119,11 @@ namespace DrPet.Bll.Services
         public async Task<DoctorDTO> GetDoctorByAppUserIdAsync(int id)
         {
             return await DbContext.Workers.Include(w => w.AppUserWorkers).Where(w => w.AppUserWorkers.FirstOrDefault().AppUserId == id).Select(DoctorSelector).SingleAsync();
+        }
+
+        public async Task<string> GetDoctorPhotoPathAsync(int id)
+        {
+            return await DbContext.Workers.Where(w => w.Id == id).Select(w => w.PhotoPath).SingleAsync();
         }
     }
 }

@@ -35,12 +35,5 @@ namespace DrPet.Web.Pages.DoctorAdmin.Doctor
 
             return Page();
         }
-
-        public IActionResult OnPost(int id)
-        {
-            WorkerService.DeleteWorker(id);
-
-            return new JsonResult(new { url = "reload" });
-        }
     }
 }

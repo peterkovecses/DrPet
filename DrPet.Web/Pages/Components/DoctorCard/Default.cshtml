@@ -1,7 +1,8 @@
 ﻿@model DrPet.Web.ViewComponents.DoctorCardViewComponent.DoctorCard
 
 <div class="col-md-4">
-    <img class="d-block w-100 mt-3 mb-3" src="~/img/@(Model.PhotoName).jpg" alt="@Model.DoctorName">
+    <img class="d-block w-100 mt-3 mb-3" src="@($"/{Model.PhotoPath}")" alt="@Model.DoctorName">
+
 </div>
 
 <div class="col-md-8">

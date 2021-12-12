@@ -162,8 +162,8 @@ namespace DrPet.Data.Migrations
                             Id = 1,
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 11, 28, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(4866),
-                            StartOfConsulting = new DateTime(2021, 11, 28, 12, 13, 48, 385, DateTimeKind.Local).AddTicks(5288),
+                            EndOfConsulting = new DateTime(2021, 12, 11, 1, 2, 13, 504, DateTimeKind.Local).AddTicks(5098),
+                            StartOfConsulting = new DateTime(2021, 12, 10, 17, 2, 13, 500, DateTimeKind.Local).AddTicks(9733),
                             WorkerId = 1
                         },
                         new
@@ -171,8 +171,8 @@ namespace DrPet.Data.Migrations
                             Id = 2,
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 11, 29, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(6012),
-                            StartOfConsulting = new DateTime(2021, 11, 29, 12, 13, 48, 388, DateTimeKind.Local).AddTicks(5992),
+                            EndOfConsulting = new DateTime(2021, 12, 12, 1, 2, 13, 504, DateTimeKind.Local).AddTicks(6320),
+                            StartOfConsulting = new DateTime(2021, 12, 11, 17, 2, 13, 504, DateTimeKind.Local).AddTicks(6293),
                             WorkerId = 2
                         },
                         new
@@ -180,8 +180,8 @@ namespace DrPet.Data.Migrations
                             Id = 3,
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 11, 30, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(6022),
-                            StartOfConsulting = new DateTime(2021, 11, 30, 12, 13, 48, 388, DateTimeKind.Local).AddTicks(6018),
+                            EndOfConsulting = new DateTime(2021, 12, 13, 1, 2, 13, 504, DateTimeKind.Local).AddTicks(6332),
+                            StartOfConsulting = new DateTime(2021, 12, 12, 17, 2, 13, 504, DateTimeKind.Local).AddTicks(6328),
                             WorkerId = 3
                         },
                         new
@@ -189,8 +189,8 @@ namespace DrPet.Data.Migrations
                             Id = 4,
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            EndOfConsulting = new DateTime(2021, 12, 1, 20, 13, 48, 388, DateTimeKind.Local).AddTicks(6031),
-                            StartOfConsulting = new DateTime(2021, 12, 1, 12, 13, 48, 388, DateTimeKind.Local).AddTicks(6026),
+                            EndOfConsulting = new DateTime(2021, 12, 14, 1, 2, 13, 504, DateTimeKind.Local).AddTicks(6341),
+                            StartOfConsulting = new DateTime(2021, 12, 13, 17, 2, 13, 504, DateTimeKind.Local).AddTicks(6337),
                             WorkerId = 4
                         });
                 });
@@ -701,6 +701,9 @@ namespace DrPet.Data.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
+                    b.Property<string>("PhotoPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Position")
                         .HasColumnType("int");
 
@@ -717,7 +720,8 @@ namespace DrPet.Data.Migrations
                             Id = 1,
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Name = "Dr. Szabó ildikó",
+                            Name = "Dr. Szabó Ildikó",
+                            PhotoPath = "doctorImages/1.jpg",
                             Position = 1,
                             PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
                         },
@@ -727,6 +731,7 @@ namespace DrPet.Data.Migrations
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Dr. Horváth Tibor",
+                            PhotoPath = "doctorImages/2.jpg",
                             Position = 1,
                             PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
                         },
@@ -736,6 +741,7 @@ namespace DrPet.Data.Migrations
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Dr. Kiss Erika",
+                            PhotoPath = "doctorImages/3.jpg",
                             Position = 1,
                             PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
                         },
@@ -745,6 +751,7 @@ namespace DrPet.Data.Migrations
                             DateOfCreation = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             DateOfUpdate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "Dr. Kovács József",
+                            PhotoPath = "doctorImages/4.jpg",
                             Position = 1,
                             PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet."
                         });

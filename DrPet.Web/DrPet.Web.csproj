@@ -26,4 +26,8 @@
     <ProjectReference Include="..\DrPet.Bll\DrPet.Bll.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\doctorImages\" />
+  </ItemGroup>
+
 </Project>

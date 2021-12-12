@@ -8,6 +8,7 @@ namespace DrPet.Data.Entities
         public string Name { get; set; }
         public Position Position { get; set; }
         public string? PublicDescription { get; set; }
+        public string? PhotoPath { get; set; }
 
         public ICollection<Treatment>? Treatments { get; set; }
         public ICollection<Consulting>? Consultings { get; set; }

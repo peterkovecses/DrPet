@@ -6,6 +6,12 @@
 <div>
     <hr />
     <dl class="row">
+        <dd class="col-sm-2">
+            <b>Fotó</b>
+        </dd>
+        <dd class="col-sm-10">
+            <img style="max-height: 300px;" src="@($"/{Model.Doctor.PhotoPath}")" alt="@Model.Doctor.Name">
+        </dd>
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Doctor.Name)
         </dt>

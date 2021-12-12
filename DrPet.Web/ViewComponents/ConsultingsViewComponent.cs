@@ -13,9 +13,12 @@ namespace DrPet.Web.ViewComponents
     public class ConsultingsViewComponent : ViewComponent
     {
         public IConsultingService ConsultingService { get; }
-        public ConsultingsViewComponent(IConsultingService consultingService)
+        public IWorkerService WorkerService { get; }
+
+        public ConsultingsViewComponent(IConsultingService consultingService, IWorkerService workerService)
         {
             ConsultingService = consultingService;
+            WorkerService = workerService;
         }
 
         public class DisplayConsultings
@@ -24,6 +27,7 @@ namespace DrPet.Web.ViewComponents
             public string? ActualMonth { get; set; }
             public IList<ConsultingDTO> Consultings { get; set; }
             public DisplayType DisplayType { get; set; }
+            public string PhotoPath { get; set; }
         }
 
         public async Task<IViewComponentResult> InvokeAsync(DisplayType displayType, DateTime? from, DateTime? till, DateTime? date, int? doctorId, int? piece)
@@ -48,7 +52,11 @@ namespace DrPet.Web.ViewComponents
             }
 
             else if (displayType == DisplayType.Doctor)
+            {
                 displayConsultings.Consultings = await ConsultingService.GetConsultingsAsync(DateTime.Now, null, doctorId, null);
+                displayConsultings.PhotoPath = await WorkerService.GetDoctorPhotoPathAsync((int)doctorId);
+            }
+                
 
             return View(displayConsultings);
         }

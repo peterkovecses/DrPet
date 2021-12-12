@@ -3,6 +3,8 @@ using DrPet.Bll.Interfaces;
 using DrPet.Bll.DTOs;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using DrPet.Web.Interfaces;
+using DrPet.Web.Enums;
 
 namespace DrPet.Web.Pages.Admin.Doctors
 {
@@ -10,18 +12,17 @@ namespace DrPet.Web.Pages.Admin.Doctors
     {
         public IWorkerService WorkerService { get; }
         public IAppUserService AppUserService { get; }
+        public IFileOperationService FileOperationService { get; }
 
-        public CreateModel(IWorkerService workerService, IAppUserService appUserService)
+        public CreateModel(IWorkerService workerService, IAppUserService appUserService, IFileOperationService fileOperationService)
         {
             WorkerService = workerService;
             AppUserService = appUserService;
+            FileOperationService = fileOperationService;
         }
 
         [BindProperty]
         public DoctorDTO Doctor { get; set; }
-
-        [BindProperty]
-        public string UnsuccessMessage { get; set; }
 
         public void OnGet()
         {
@@ -32,9 +33,10 @@ namespace DrPet.Web.Pages.Admin.Doctors
             if (!ModelState.IsValid) 
                 return Page();
 
+            // First connect a doctor with an app user by email
             if (Doctor.Email == null)
             {
-                UnsuccessMessage = "E-mail cím megadása kötelezõ.";
+                ModelState.AddModelError("Doctor.Email", "E-mail cím megadása kötelezõ.");
                 return Page();
             }
 
@@ -43,19 +45,41 @@ namespace DrPet.Web.Pages.Admin.Doctors
             // User must be registered first
             if (appUserDTO == null)
             {
-                UnsuccessMessage = "Ilyen e-mail címmel nem található felhasználó. Elsõként az orvosnak felhasználónak kell regisztrálnia.";
+                ModelState.AddModelError("Doctor.Email", "Ilyen e-mail címmel nem található felhasználó. Elsõként az orvosnak felhasználónak kell regisztrálnia.");
                 return Page();
             }
 
             // This email address is already recorded for another user
             if (appUserDTO.WorkerId  != null)
             {
-                UnsuccessMessage = "Az e-mail cím már megvan adva másik orvoshoz.";
+                ModelState.AddModelError("Doctor.Email", "Az e-mail cím már megvan adva másik orvoshoz.");
                 return Page();
             }
 
             Doctor.AppUserId = appUserDTO.Id;
 
+            // File upload (photo)
+            if (Doctor.Photo != null && !string.IsNullOrEmpty(Doctor.Photo.FileName))
+            {
+                var result = await FileOperationService.SaveFileAsync(Doctor);                
+
+                if (result.Item2 == FileErrorType.NotAllowedExtension)
+                {
+                    ModelState.AddModelError("Doctor.Photo", "A kép kiterjesztése nem megfelelõ.");
+                    return Page();
+                }
+
+                if (result.Item2 == FileErrorType.Size)
+                {
+                    ModelState.AddModelError("Doctor.Photo", "Maximális képméret: 5 MB.");
+                    return Page();
+                }
+
+                Doctor.PhotoPath = result.Item1;
+            }
+
+
+            // Save the doctor to the database
             await WorkerService.AddOrUpdateDoctorAsync(Doctor);
 
             return RedirectToPage("./Index");

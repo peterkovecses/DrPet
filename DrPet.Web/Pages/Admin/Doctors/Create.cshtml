@@ -7,7 +7,7 @@
 
 <div class="row">
     <div class="col-md-8">
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
 
             <div class="form-group col-md-5 p-0">
@@ -28,11 +28,10 @@
                 <span asp-validation-for="Doctor.Email" class="text-danger"></span>
             </div>
 
-            <div class="text-danger">
-                @if (Model.UnsuccessMessage != string.Empty)
-                {
-                    <p>@Model.UnsuccessMessage</p>
-                }
+            <div class="form-group col-md-5 p-0">
+                <label asp-for="Doctor.Photo" class="control-label"></label>
+                <input asp-for="Doctor.Photo" type="file" class="form-control" />
+                <span asp-validation-for="Doctor.Photo" class="text-danger"></span>
             </div>
 
             <div class="form-group mt-2">

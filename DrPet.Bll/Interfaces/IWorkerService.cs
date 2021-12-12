@@ -17,5 +17,7 @@ namespace DrPet.Bll.Interfaces
         public Task<int> GetDoctorIdByAppUserIdAsync(int id);
 
         public Task<DoctorDTO> GetDoctorByAppUserIdAsync(int id);
+
+        public Task<string> GetDoctorPhotoPathAsync(int id);
     }
 }

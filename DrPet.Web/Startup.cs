@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using DrPet.Web.Services;
 using DrPet.Data.Seed.Interfaces;
 using DrPet.Data.Seed.Services;
+using Microsoft.AspNetCore.Http.Features;
+using DrPet.Web.Interfaces;
 
 namespace DrPet.Web
 {
@@ -48,6 +50,16 @@ namespace DrPet.Web
                 options.SignIn.RequireConfirmedAccount = true;
             });
 
+            services.Configure<FormOptions>(options =>
+            {
+                options.MultipartBodyLengthLimit = 256 * 1024 * 1024; // max file méret
+            });
+
+            services.Configure<IISServerOptions>(options =>
+            {
+                options.MaxRequestBodySize = 50 * 1024 * 1024; // IIS max file méret (Kestrel a Program.cs-ben van beállítva)
+            });
+
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.HttpOnly = true;
@@ -73,6 +85,7 @@ namespace DrPet.Web
             services.AddScoped<ITreatmentService, TreatmentService>();
             services.AddScoped<IAppUserService, AppUserService>();
             services.AddScoped<IAppUserWorkerSeedService, AppUserWorkerSeedService>();
+            services.AddScoped<IFileOperationService, FileOperationService>();
 
             services.AddRazorPages();
 
