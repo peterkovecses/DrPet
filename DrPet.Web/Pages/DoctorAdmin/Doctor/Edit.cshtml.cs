@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DrPet.Web.Interfaces;
 using DrPet.Web.Enums;
+using Ganss.XSS;
 
 namespace DrPet.Web.Pages.DoctorAdmin.Doctor
 {
@@ -59,6 +60,8 @@ namespace DrPet.Web.Pages.DoctorAdmin.Doctor
 
                 Doctor.PhotoPath = result.Item1;
             }
+
+            Doctor.PublicDescription = new HtmlSanitizer().Sanitize(Doctor.PublicDescription);
 
             await WorkerService.AddOrUpdateDoctorAsync(Doctor);
 

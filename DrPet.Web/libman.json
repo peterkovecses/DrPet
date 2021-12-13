@@ -13,6 +13,10 @@
     {
       "library": "jasny-bootstrap@4.0.0",
       "destination": "wwwroot/lib/jasny-bootstrap/"
+    },
+    {
+      "library": "tinymce@5.10.2",
+      "destination": "wwwroot/lib/tinymce/"
     }
   ]
 }

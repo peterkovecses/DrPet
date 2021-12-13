@@ -8,6 +8,6 @@
 <div class="col-md-8">
     <div class="mt-4">
         <h5><a class="text-decoration-none text-dark" asp-area="" asp-page="/Consultings/Doctorsconsultings" asp-route-id="@Model.DoctorId">@Model.DoctorName</a></h5>
-        <p>@Model.PublicDescription</p>
+        <p>@Html.Raw(Model.PublicDescription)</p>
     </div>
 </div>

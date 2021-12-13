@@ -10,6 +10,8 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
             <input type="hidden" asp-for="Doctor.Id" />
+            <input type="hidden" asp-for="Doctor.PhotoPath" />
+
 
             <div class="form-group col-md-5 p-0">
                 <label asp-for="Doctor.Name" class="control-label"></label>
@@ -58,6 +60,25 @@
 
 
 @section Scripts {
+    <script src="~/lib/tinymce/tinymce.min.js"></script>
     <script src="~/lib/jasny-bootstrap/js/jasny-bootstrap.min.js"></script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        tinymce.init({
+            selector: '#Doctor_PublicDescription',
+            height: 300,
+            menubar: false,
+            plugins: [
+                'advlist autolink lists link image charmap print preview anchor',
+                'searchreplace visualblocks code fullscreen',
+                'insertdatetime media table paste code help wordcount'
+            ],
+            toolbar: 'undo redo | formatselect | ' +
+                'bold italic backcolor | alignleft aligncenter ' +
+                'alignright alignjustify | bullist numlist outdent indent | ' +
+                'removeformat | help',
+            content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+        });
+    </script>
 }
