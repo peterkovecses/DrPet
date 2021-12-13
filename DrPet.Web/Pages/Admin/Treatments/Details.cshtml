@@ -52,7 +52,7 @@
             @Html.DisplayNameFor(model => model.Treatment.Comment)
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Treatment.Comment)
+            @Html.Raw(Model.Treatment.Comment)
         </dd>
     </dl>
 </div>
