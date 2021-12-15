@@ -5,7 +5,7 @@ using System;
 
 namespace DrPet.Data.Entities
 {
-    public class EntityBase
+    public abstract class EntityBase
     {
         public int Id { get; set; }
         public string? Comment { get; set; }
