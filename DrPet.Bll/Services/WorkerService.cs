@@ -70,7 +70,6 @@ namespace DrPet.Bll.Services
             {
                 EntityEntry<Worker> entry;
                 var worker = await DbContext.Workers.FindAsync(doctorDTO.Id);
-                worker.DateOfUpdate = DateTime.Now;
                 entry = DbContext.Entry(worker);
                 entry.CurrentValues.SetValues(doctorDTO);
             }
@@ -84,8 +83,7 @@ namespace DrPet.Bll.Services
                     Name = doctorDTO.Name,
                     PublicDescription = doctorDTO.PublicDescription,
                     Position = doctorDTO.Position,
-                    PhotoPath = doctorDTO.PhotoPath,
-                    DateOfCreation = DateTime.Now
+                    PhotoPath = doctorDTO.PhotoPath
                 };
 
                 worker.AppUserWorkers = new List<AppUserWorker>
@@ -108,7 +106,6 @@ namespace DrPet.Bll.Services
             }
 
             await DbContext.SaveChangesAsync();
-            { }
         }
 
         public async Task<int> GetDoctorIdByAppUserIdAsync(int id)

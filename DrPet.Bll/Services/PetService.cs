@@ -68,7 +68,6 @@ namespace DrPet.Bll.Services
                 pet.Birthdate = petDTO.Birthdate;
                 pet.VarietyId = petDTO.VarietyId;
                 pet.Comment = petDTO.Comment;
-                pet.DateOfUpdate = DateTime.Now;
 
                 var ownership = pet.PetOwnerships.Where(o => o.OwnerId == petDTO.PrevOwnerId).SingleOrDefault();
 
@@ -76,7 +75,6 @@ namespace DrPet.Bll.Services
                     ownership = new PetOwnership();
 
                 ownership.OwnerId = petDTO.OwnerId;
-                ownership.DateOfUpdate = pet.DateOfUpdate;
             }
                 
             // create
@@ -88,7 +86,6 @@ namespace DrPet.Bll.Services
                     Birthdate = petDTO.Birthdate,
                     VarietyId = petDTO.VarietyId,
                     Comment = petDTO.Comment,
-                    DateOfCreation = DateTime.Now
                 };
 
                 pet.PetOwnerships = new List<PetOwnership>
@@ -97,7 +94,6 @@ namespace DrPet.Bll.Services
                     {
                         OwnerId = petDTO.OwnerId,
                         PetId = petDTO.Id,
-                        DateOfCreation = DateTime.Now
                     }
                 };
 

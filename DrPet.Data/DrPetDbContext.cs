@@ -1,4 +1,5 @@
 ﻿using DrPet.Data.Entities;
+using DrPet.Data.Interceptors;
 using DrPet.Data.Seed;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -33,5 +34,8 @@ namespace DrPet.Data
 
             TestDataConfiguration.ConfigureSeedData(modelBuilder);
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+            => optionsBuilder.AddInterceptors(SimpleAuditInterceptor.Instance);
     }
 }

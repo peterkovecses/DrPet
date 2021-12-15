@@ -61,12 +61,20 @@ namespace DrPet.Data.Seed
                 WithAudit(new Worker { Id = 4, Name = "Dr. Kovács József", Position = Position.Doctor, PhotoPath = "doctorImages/4.jpg", PublicDescription = "Duis ac sapien laoreet, gravida justo vel, posuere leo. Curabitur mi diam, interdum vel neque in, consequat suscipit ex. Morbi porta sagittis nunc, a dictum tortor viverra et. Mauris egestas at dui in ultrices. Suspendisse tempor imperdiet justo, eget maximus nibh vulputate nec. Quisque vel urna sed ipsum venenatis facilisis. Nam rutrum, augue id rhoncus fermentum, lorem quam suscipit orci, nec lobortis lacus velit a justo. Suspendisse commodo lacus nec sagittis efficitur. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dictum aliquet sapien. Nulla id pellentesque nisi. Aliquam viverra, est vel auctor pretium, mauris magna rhoncus nisl, vel dictum arcu velit non dui. Nullam dignissim elit quis lectus aliquam, nec aliquam est molestie. Donec aliquet sed mauris in molestie. Phasellus vitae elit vel mi interdum viverra. Integer vel leo tempus, aliquam enim a, hendrerit ipsum. Pellentesque finibus libero libero, volutpat ullamcorper dui facilisis at. Praesent sit amet lacus mollis, egestas dolor nec, porta est. Integer dapibus ex ipsum, eu semper massa maximus sed. Aenean sodales, nulla ac semper blandit, quam diam dignissim nisi, lobortis posuere ipsum diam vitae justo. Ut fringilla elementum orci at faucibus. Nullam posuere porta purus, eu aliquet felis aliquam volutpat. Phasellus turpis libero, lobortis sit amet diam eget, tempor varius libero. Quisque cursus ullamcorper laoreet." })
                 );
 
-            modelBuilder.Entity<Consulting>().HasData(
-                WithAudit(new Consulting { Id = 1, StartOfConsulting = DateTime.Now, EndOfConsulting = DateTime.Now.AddHours(8), WorkerId = 1 }),
-                WithAudit(new Consulting { Id = 2, StartOfConsulting = DateTime.Now.AddHours(24), EndOfConsulting = DateTime.Now.AddHours(32), WorkerId = 2 }),
-                WithAudit(new Consulting { Id = 3, StartOfConsulting = DateTime.Now.AddHours(48), EndOfConsulting = DateTime.Now.AddHours(56), WorkerId = 3 }),
-                WithAudit(new Consulting { Id = 4, StartOfConsulting = DateTime.Now.AddHours(72), EndOfConsulting = DateTime.Now.AddHours(80), WorkerId = 4 })
+            var startOfConsulting = DateTime.Now.AddMonths(-2);
+            var id = 1;
+
+            for (int i = 0; i < 200; i++)
+            {
+                modelBuilder.Entity<Consulting>().HasData(
+                WithAudit(new Consulting { Id = id++, StartOfConsulting = startOfConsulting, EndOfConsulting = startOfConsulting.AddHours(8), WorkerId = 1 }),
+                WithAudit(new Consulting { Id = id++, StartOfConsulting = startOfConsulting.AddHours(24), EndOfConsulting = startOfConsulting.AddHours(32), WorkerId = 2 }),
+                WithAudit(new Consulting { Id = id++, StartOfConsulting = startOfConsulting.AddHours(48), EndOfConsulting = startOfConsulting.AddHours(56), WorkerId = 3 }),
+                WithAudit(new Consulting { Id = id++, StartOfConsulting = startOfConsulting.AddHours(72), EndOfConsulting = startOfConsulting.AddHours(80), WorkerId = 4 })
                 );
+
+                startOfConsulting = startOfConsulting.AddHours(96);
+            }            
 
             T WithAudit<T>(T entity) where T : EntityBase
             {

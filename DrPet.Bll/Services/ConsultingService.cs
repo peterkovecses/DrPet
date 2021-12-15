@@ -100,7 +100,6 @@ namespace DrPet.Bll.Services
             if (consultingDTO.Id != 0)
             {
                 var consulting = await DbContext.Consultings.FindAsync(consultingDTO.Id);
-                consulting.DateOfUpdate = DateTime.Now;
                 entry = DbContext.Entry(consulting);
             }    
             

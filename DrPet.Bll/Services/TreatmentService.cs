@@ -66,7 +66,6 @@ namespace DrPet.Bll.Services
                 treatment.TypeId = treatmentDTO.TypeId;
                 treatment.MedicineId = treatmentDTO.MedicineId;
                 treatment.Comment = treatmentDTO.Comment;
-                treatment.DateOfUpdate = DateTime.Now;
             }
 
             // create
@@ -82,8 +81,7 @@ namespace DrPet.Bll.Services
                     WorkerId = treatmentDTO.WorkerId,
                     ConsultingId = treatmentDTO.ConsultingId,
                     PurchaseStatus = treatmentDTO.PurchaseStatus,
-                    Comment = treatmentDTO.Comment,
-                    DateOfCreation = DateTime.Now
+                    Comment = treatmentDTO.Comment
                 };
 
                 DbContext.Treatments.Add(treatment);

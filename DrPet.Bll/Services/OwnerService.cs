@@ -56,13 +56,12 @@ namespace DrPet.Bll.Services
             if (ownerDTO.Id != 0)
             {
                 var owner = await DbContext.Owners.FindAsync(ownerDTO.Id);
-                owner.DateOfUpdate = DateTime.Now;
                 entry = DbContext.Entry(owner);
             }
 
             // create
             else
-                entry = DbContext.Add(new Owner { DateOfCreation = DateTime.Now });
+                entry = DbContext.Add(new Owner());
 
             entry.CurrentValues.SetValues(ownerDTO);
 
