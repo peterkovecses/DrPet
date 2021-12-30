@@ -1,5 +1,5 @@
 ﻿
-namespace DrPet.Web.Settings
+namespace DrPet.Data.Seed.Settings
 {
     public class AdminSettings
     {

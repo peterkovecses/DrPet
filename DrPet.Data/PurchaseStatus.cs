@@ -2,8 +2,8 @@
 {
     public enum PurchaseStatus
     {
-        Reserve = 1,
-        WaitinForPayment = 2,
+        Reserved = 1,
+        WaitingForPayment = 2,
         Payed = 3
     }
 }

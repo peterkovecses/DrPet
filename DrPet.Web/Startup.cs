@@ -17,6 +17,7 @@ using DrPet.Data.Seed.Interfaces;
 using DrPet.Data.Seed.Services;
 using Microsoft.AspNetCore.Http.Features;
 using DrPet.Web.Interfaces;
+using DrPet.Data.Seed.Settings;
 
 namespace DrPet.Web
 {
@@ -86,8 +87,6 @@ namespace DrPet.Web
             services.AddScoped<IAppUserService, AppUserService>();
             services.AddScoped<IAppUserWorkerSeedService, AppUserWorkerSeedService>();
             services.AddScoped<IFileOperationService, FileOperationService>();
-
-            services.AddRazorPages();
 
             services.AddAuthentication().AddGoogle(options => {
                 options.ClientId = Configuration["Authentication:Google:ClientId"];

@@ -30,20 +30,14 @@ namespace DrPet.Bll.Services
             Id = d.Id,
             Name = d.Name,
             PublicDescription = d.PublicDescription,
+            ShortPublicDescription = d.PublicDescription.Shorten(200),
             PhotoPath = d.PhotoPath
         };
 
         public async Task<IList<DoctorDTO>> GetDoctorsAsync()
         {
             return (await DbContext.Workers.Where(w => w.Position == Position.Doctor)
-                .Select(d => new DoctorDTO
-                {
-                    Id = d.Id,
-                    Name = d.Name,
-                    PhotoPath = d.PhotoPath,
-                    PublicDescription = d.PublicDescription,
-                    ShortPublicDescription = d.PublicDescription.Shorten(200) // Helpers\StringHelper.cs
-                })
+                .Select(DoctorSelector)
                 .ToListAsync())
                 .OrderBy(d => d.Name)
                 .ToList();

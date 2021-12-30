@@ -10,15 +10,12 @@ namespace DrPet.Web.Pages
     public class IndexModel : PageModel
     {
         public IWorkerService WorkerService { get; }
-        public IConsultingService ConsultingService { get; }
-        public IndexModel(IWorkerService workerService, IConsultingService consultingService)
+        public IndexModel(IWorkerService workerService)
         {
-            WorkerService = workerService;
-            ConsultingService = consultingService;            
+            WorkerService = workerService;          
         }        
 
         public IEnumerable<DoctorDTO> Doctors { get; private set; }
-        public IEnumerable<ConsultingDTO> Consultings { get; private set; }
 
         public async Task OnGetAsync()
         {

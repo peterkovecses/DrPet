@@ -45,7 +45,7 @@ namespace DrPet.Bll.DTOs
         public int ConsultingId { get; set; }
 
         [Display(Name = "Fizetés státusza")]
-        public PurchaseStatus PurchaseStatus { get; set; } = PurchaseStatus.WaitinForPayment;
+        public PurchaseStatus PurchaseStatus { get; set; } = PurchaseStatus.WaitingForPayment;
 
         [Display(Name = "Megjegyzés")]
         public string? Comment { get; set; }

@@ -1,6 +1,6 @@
 ﻿using DrPet.Data.Entities;
 using DrPet.Data.Seed.Interfaces;
-using DrPet.Web.Settings;
+using DrPet.Data.Seed.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using System;
@@ -29,7 +29,7 @@ namespace DrPet.Data.Seed.Services
                 // Add doctor AppUsers
                 var doctorUsers = new List<AppUser>
             {
-                new AppUser { UserName = "drszaboildiko@gmail.com", Email =  "drszaboildiko@gmail.com", Name = "Dr. Szabó ildikó", SecurityStamp = Guid.NewGuid().ToString()},
+                new AppUser { UserName = "drszaboildiko@gmail.com", Email =  "drszaboildiko@gmail.com", Name = "Dr. Szabó Ildikó", SecurityStamp = Guid.NewGuid().ToString()},
                 new AppUser { UserName = "drhorvathtibor@gmail.com", Email =  "drhorvathtibor@gmail.com", Name = "Dr. Horváth Tibor", SecurityStamp = Guid.NewGuid().ToString()},
                 new AppUser { UserName = "drkisserika@gmail.com", Email =  "drkisserika@gmail.com", Name = "Dr. Kiss Erika", SecurityStamp = Guid.NewGuid().ToString()},
                 new AppUser { UserName = "drkovacsjozsef@gmail.com", Email =  "drkovacsjozsef@gmail.com", Name = "Dr. Kovács József", SecurityStamp = Guid.NewGuid().ToString()}

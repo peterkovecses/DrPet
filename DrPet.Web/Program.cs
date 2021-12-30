@@ -36,7 +36,7 @@ namespace DrPet.Web
                 await appUserWorkerSeeder.SeedAppUserWorkerAsync();
             }
             host.Run();
-    }
+        }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
