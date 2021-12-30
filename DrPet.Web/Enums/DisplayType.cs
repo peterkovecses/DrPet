@@ -5,6 +5,6 @@ namespace DrPet.Web.Enums
     {
         ActualWeak = 1,
         Monthly = 2,
-        Doctor
+        Doctor = 3
     }
 }

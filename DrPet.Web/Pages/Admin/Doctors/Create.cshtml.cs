@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using DrPet.Web.Interfaces;
 using DrPet.Web.Enums;
+using Ganss.XSS;
 
 namespace DrPet.Web.Pages.Admin.Doctors
 {
@@ -32,6 +33,8 @@ namespace DrPet.Web.Pages.Admin.Doctors
         {
             if (!ModelState.IsValid) 
                 return Page();
+
+            Doctor.PublicDescription = new HtmlSanitizer().Sanitize(Doctor.PublicDescription);
 
             // First connect a doctor with an app user by email
             if (Doctor.Email == null)

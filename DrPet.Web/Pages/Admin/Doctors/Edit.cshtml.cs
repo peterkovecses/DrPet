@@ -41,6 +41,8 @@ namespace DrPet.Web.Pages.Admin.Doctors
             if (!ModelState.IsValid)
                 return Page();
 
+            Doctor.PublicDescription = new HtmlSanitizer().Sanitize(Doctor.PublicDescription);
+
             // File upload (photo)
             if (Doctor.Photo != null && !string.IsNullOrEmpty(Doctor.Photo.FileName))
             {
@@ -60,8 +62,6 @@ namespace DrPet.Web.Pages.Admin.Doctors
 
                 Doctor.PhotoPath = result.Item1;
             }
-
-            Doctor.PublicDescription = new HtmlSanitizer().Sanitize(Doctor.PublicDescription);
 
             await WorkerService.AddOrUpdateDoctorAsync(Doctor);
 
